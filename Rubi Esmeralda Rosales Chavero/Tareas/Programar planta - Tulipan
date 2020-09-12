@@ -1,0 +1,674 @@
+❀ INFORMACION PARA EL CRECIMIENTO DEL TULIPAN
+
+    REQUIERE:
+        Humedad: Requiere un nivel de humedad relativa en torno al 85%. 
+        Luz: Pueden permanecer al sol o semisombra. Entre %100 y %50.
+    
+    ETAPAS:
+        bulbo:          3 meses     Si esta etapa se lleva a cabo en:
+                                    - primavera pierde  0.01 de salud al dia
+                                    - verano    pierde  0.02 de salud al dia
+                                    - otoño     gana    0.01 de salud al dia
+                                    - invierno  gana    0.02 de salud al dia
+        tallo y hojas:  3 meses
+        flor:           1 mes       En esta etapa la planta pierde 0.06 de salud por dia
+        muerta:         7 meses     (o cuando la salud llega a 0)
+
+    SALUD: 
+        Se inicia en 1 y sigue las siguientes condiciones:
+          - con luz  entre 1.00 y 0.76 gana   0.03 de salud
+          - con luz  entre 0.75 y 0.50 gana   0.02 de salud
+          - con luz  entre 0.49 y 0.25 pierde 0.01 de salud
+          - con luz  entre 0.24 y 0.10 pierde 0.02 de salud
+          - con luz  entre 0.09 y 0.00 pierde 0.03 de salud
+          - con agua entre 1.00 y 0.91 pierde 0.01 de salud 
+          - con agua entre 0.90 y 0.80 gana   0.04 de salud
+          - con agua entre 0.79 y 0.40 pierde 0.02 de salud
+          - con agua entre 0.39 y 0.10 pierde 0.03 de salud 
+          - con agua entre 0.09 y 0.00 pierde 0.04 de salud  
+    
+    CLIMA: 
+        primavera
+          - Al valor que clima tiene en lluvia se le resta 0.1
+          - Al valor que clima tiene en sol    se le suma  0.1
+        verano
+          - Al valor que clima tiene en lluvia se le suma  0.2
+          - Al valor que clima tiene en sol    se le suma  0.2
+        otoño
+          - Al valor que clima tiene en lluvia se le suma  0.1
+          - Al valor que clima tiene en sol    se le resta 0.1
+        invierno
+          - Al valor que clima tiene en lluvia se le resta 0.2
+          - Al valor que clima tiene en sol    se le resta 0.2
+
+
+❀ LOGICA DE PROGRAMACION 
+
+      NOTAS:  Realize el programa en lenguaje java. Ocupe las siguientes clases:
+          - PRINCIPAL (lineas  58 - 250) main class
+          - TULIPAN   (lineas 252 - 398)
+          - CLIMA     (lineas 400 - 432)
+          - PRIMAVERA (lineas 434 - 454)
+          - VERANO    (lineas 456 - 476)
+          - OTOÑO     (lineas 478 - 498)
+          - INVIERNO  (lineas 500 - 520)
+          - TIEMPO    (lineas 522 - 631)
+          - LECTURAS  (lineas 633 - 674)
+              
+public class Principal implements Runnable
+{
+
+    Tulipan plantita;
+
+    public Principal(Tulipan plantita)
+    {
+        this.plantita = plantita;
+    }
+
+    public static void main(String[] args)
+    {
+        //AQUI SE INICIALIZA LA PLANTA
+        
+        System.out.println("--------------------- Creando planta ---------------------");
+        String[] estaciones = {"primavera", "verano", "otonio", "invierno"};
+        int estacion_siembra = -1;
+        do
+        {
+            System.out.println("\n¿En qué estacion desea sembrar su tulipan? (minúsculas) ");
+            String tmp = Lecturas.cadena();
+            for (int i = 0; i < estaciones.length; i++)
+            {
+                if (estaciones[i].equals(tmp))
+                {
+                    estacion_siembra = i;
+                }
+            }
+        } while (!(estacion_siembra <= 3 && estacion_siembra >= 0));
+
+        System.out.println("\n--------------------- Sembrando -------------------------");
+        Date fecha_siembra = new Date(120, Tiempo.mes(estacion_siembra), 21);
+        boolean llovera = Tiempo.llovera(fecha_siembra);
+        float agua = llovera ? 1 : 0;
+        float sol = Tiempo.soleado(fecha_siembra);
+        Tulipan temp = new Tulipan(fecha_siembra, agua, sol);
+
+
+        //SE IMPRIME EL ESTATUS INICIAL DE LA PLANTA
+        
+        System.out.println("\nValores iniciales de la planta "
+                + "\n - Fecha de siembra: " + fecha_siembra.getDate() + "/" + (fecha_siembra.getMonth() + 1)
+                + "\n - Edad: " + temp.getEdad() + " meses"
+                + "\n - Etapa: " + temp.getEtapa()
+                + "\n - Salud: " + temp.getSalud()
+                + "\n - Nivel de agua: " + temp.getAgua()
+                + "\n - Nivel de luz solar: " + temp.getLuz()
+                + "\nValores iniciales del ambiente"
+                + "\n - Este dia llueve?: " + llovera
+                + "\n - Cantidad de luz solar: " + sol
+        );
+
+
+        //COMIENZA O SE CANCELA EL CRECIMIENTO DE LA PLANTA
+        
+        char listo;
+        do
+        {
+            System.out.println("\nPresione 'i' para iniciar el crecimiento o 'f' para cancelar: ");
+            listo = Lecturas.caracter();
+        } while (!(listo == 'i' || listo == 'f'));
+
+        if (listo == 'i')
+        {
+            System.out.println("\n--------------------- Creciendo -------------------------");
+            Thread th = new Thread((Runnable) new Principal(temp));
+            th.start();
+        } else
+        {
+            System.err.println("Crecimiento cancelado...");
+        }
+    }
+
+    @Override
+    public void run()
+    {
+        Calendar calendario = new GregorianCalendar(plantita.getFecha_siembra().getYear() + 1900, plantita.getFecha_siembra().getMonth(), plantita.getFecha_siembra().getDate());
+        int mes_anterior = calendario.get(Calendar.MONTH);
+        int dia = 0;
+        
+        while (plantita.getEdad() < 7)
+        {
+            if (plantita.getSalud() > 0)
+            {
+                try
+                {
+                    //AQUI SE EVALUA LA EDAD DE LA PLANTA
+                    
+                    calendario.add(Calendar.DAY_OF_MONTH, 1);
+                    dia += 1;
+                    Calendar tmp = new GregorianCalendar(calendario.get(Calendar.YEAR), calendario.get(Calendar.MONTH), calendario.get(Calendar.DAY_OF_MONTH));
+                    tmp.roll(Calendar.MONTH, -1);
+                    
+                    if ((tmp.get(Calendar.MONTH) == mes_anterior) && (calendario.get(Calendar.DAY_OF_MONTH) == 21))
+                    {
+                        mes_anterior = calendario.get(Calendar.MONTH);
+                        plantita.setEdad(plantita.getEdad() + 1);
+                    }
+
+
+                    //AQUI SE EVALUA LA ETAPA DE LA PLANTA
+                    
+                    if (plantita.getEdad() >= 0 && plantita.getEdad() < 3)                // etapa de bulbo
+                    {
+                        int estacion = Tiempo.estacion(calendario.get(Calendar.MONTH));
+                        switch (estacion)
+                        {
+                            case 0:
+                                plantita.setSalud((float) (plantita.getSalud() - 0.01));
+                                break;
+                            case 1:
+                                plantita.setSalud((float) (plantita.getSalud() - 0.02));
+                                break;
+                            case 2:
+                                plantita.setSalud((float) (plantita.getSalud() + 0.01));
+                                break;
+                            case 3:
+                                plantita.setSalud((float) (plantita.getSalud() + 0.02));
+                                break;
+                        }
+                    } else if (plantita.getEdad() >= 3 && plantita.getEdad() < 6)         //etapa de hojas
+                    {
+                        plantita.setEtapa("Tallo y Hojas");
+                    } else if (plantita.getEdad() == 6)                                   //se marchita, etapa de flor
+                    {
+                        plantita.setEtapa("Flor");
+                        plantita.setSalud((float) (plantita.getSalud() - 0.06));
+                    } else                                                                //ya se murio
+                    {   
+                        plantita.setEtapa("Muerta");
+                    }
+
+
+                    //AQUI SE EVALUA LA CANTIDAD DE LUZ Y AGUA QUE OBTIENE LA PLANTA A PARTIR DEL SOL Y LA LLUVIA
+                    
+                    float sol = Tiempo.soleado(calendario.getTime());
+                    plantita.setLuz(sol);
+                    boolean lluvia = Tiempo.llovera(calendario.getTime());
+                    if (lluvia)
+                    {
+                        if (sol > 0.6)
+                        {
+                            plantita.setAgua((float) 0.9);
+                        } else
+                        {
+                            plantita.setAgua(1);
+                        }
+                    } else
+                    {
+                        if (sol > 0.5)
+                        {
+                            plantita.setAgua((float) (plantita.getAgua() - 0.3));
+                        } else
+                        {
+                            plantita.setAgua((float) (plantita.getAgua() - 0.2));
+                        }
+                    }
+
+
+                    //AQUI SE IMPRIME EL STATUS DEL DIA DE LA PLANTA
+                    
+                    System.out.println("\n\nDia: " + dia
+                            + ". Fecha: " + calendario.get(Calendar.DAY_OF_MONTH)
+                            + "/" + (calendario.get(Calendar.MONTH) + 1)
+                            + "\nValores del ambiente"
+                            + "\n - Este dia llueve?: " + lluvia
+                            + "\n - Cantidad de luz solar: " + sol
+                            + "\nValores de la planta"
+                            + "\n - Edad: " + plantita.getEdad() + " meses"
+                            + "\n - Etapa: " + plantita.getEtapa()
+                            + "\n - Salud: " + plantita.getSalud()
+                            + "\n - Nivel de agua: " + plantita.getAgua()
+                            + "\n - Nivel de luz solar: " + plantita.getLuz());
+                    Thread.sleep(500);
+                    
+                } catch (Exception ex)
+                {
+                    System.err.println("ERROR: " + ex.toString());
+                }
+            } else
+            {
+                if (plantita.getEtapa().equals("Muerta"))
+                {
+                    System.out.println("--------------- Ciclo de vida completado -----------------");
+                } else
+                {
+                    System.err.println("--------------- La planta se ha muerto -----------------");
+                }
+                return;
+            }
+        }
+    }
+}
+
+public class Tulipan
+{
+    private float luz;              // entre 0 y 1; deseable entre 1.00 y 0.50
+    private float agua;             // entre 0 y 1; deseable entre 0.90 y 0.80
+    private float salud;           
+    private Date fecha_siembra;     // Coincide con el inicio de la estacion (dia 21)
+    private int edad;               // de 0 a 7 meses
+    private String etapa;           // bulbo de 0 a 2 meses, tallo y hojas de 3 a 5 meses, flor
+
+    public Tulipan(Date fecha_siembra, float agua, float sol)
+    {
+        this.fecha_siembra = fecha_siembra;
+        this.luz = sol;
+        this.agua = agua;
+        this.edad = 0;
+        this.salud = 1;
+        this.etapa = "bulbo";
+    }
+
+    public void setAgua(float agua)
+    {
+        this.agua = ajusta_agua(agua);
+
+        float salud_temp = getSalud();
+        if (agua <= 1 && agua >= 0.91)
+        {
+            salud_temp -= 0.01;
+        } else if (agua <= 0.9 && agua >= 0.8)
+        {
+            salud_temp += 0.04;
+        } else if (agua <= 0.79 && agua >= 0.4)
+        {
+            salud_temp -= 0.02;
+        } else if (agua <= 0.39 && agua >= 0.1)
+        {
+            salud_temp -= 0.03;
+        } else if (agua <= 0.09 && agua >= 0.0)
+        {
+            salud_temp -= 0.04;
+        }
+
+        ajusta_salud(salud_temp);
+    }
+
+    public void setLuz(float luz)
+    {
+        this.luz = luz;
+
+        float salud_temp = getSalud();
+        if (luz <= 1 && luz >= 0.76)
+        {
+            salud_temp += 0.03;
+        } else if (luz <= 0.75 && luz >= 0.50)
+        {
+            salud_temp += 0.02;
+        } else if (luz <= 0.49 && luz >= 0.25)
+        {
+            salud_temp -= 0.01;
+        } else if (luz <= 0.24 && luz >= 0.1)
+        {
+            salud_temp -= 0.02;
+        } else if (luz <= 0.09 && luz >= 0)
+        {
+            salud_temp -= 0.03;
+        }
+
+        ajusta_salud(salud_temp);
+    }
+
+    private void ajusta_salud(float salud_temp)
+    {
+        if (salud_temp > 1)
+        {
+            setSalud(1);
+        } else if (salud_temp < 0)
+        {
+            setSalud(0);
+        } else
+        {
+            setSalud(salud_temp); l
+        }
+    }
+
+    private float ajusta_agua(float agua)
+    {
+        if (agua > 1)
+        {
+            return 1;
+        } else if (agua < 0)
+        {
+            return 1;
+        } else
+        {
+            return agua;
+        }
+    }
+
+    public float getLuz()
+    {
+        return luz;
+    }
+
+    public float getAgua()
+    {
+        return agua;
+    }
+
+    public float getSalud()
+    {
+        return salud;
+    }
+
+    public void setSalud(float salud)
+    {
+        this.salud = salud;
+    }
+    
+    public Date getFecha_siembra()
+    {
+        return fecha_siembra;
+    }
+
+    public void setFecha_siembra(Date fecha_siembra)
+    {
+        this.fecha_siembra = fecha_siembra;
+    }
+
+    public int getEdad()
+    {
+        return edad;
+    }
+
+    public void setEdad(int edad)
+    {
+        this.edad = edad;
+    }
+
+    public String getEtapa()
+    {
+        return etapa;
+    }
+
+    public void setEtapa(String etapa)
+    {
+        this.etapa = etapa;
+    }
+}
+
+public abstract class Clima
+{
+    private float lluvia; // entre 1.00 y 0.00
+    private float sol;    // entre 1.00 y 0.00
+
+    public Clima()
+    {
+        this.lluvia = (float) Math.random();
+        this.sol = (float) Math.random());
+    }
+
+    abstract float lluvia();
+
+    public float getLluvia()
+    {
+        return lluvia;
+    }
+
+    public void setLluvia(float lluvia)
+    {
+        this.lluvia = lluvia;
+    }
+
+    public float getSol()
+    {
+        return sol;
+    }
+
+    public void setSol(float sol)
+    {
+        this.sol = sol;
+    }
+}
+
+public class Primavera extends Clima
+{
+    public Primavera()
+    {
+        super();
+    }
+
+    @Override
+    public float lluvia()
+    {
+        float ll = super.getLluvia();
+        return (float) ((ll >= 0.1) ? (ll - 0.1) : 0);
+    }
+
+    @Override
+    public float sol()
+    {
+        float s = super.getSol();
+        return (float) ((s <= 0.9) ? (s + 0.1) : 1);
+    }
+}
+
+public class Verano extends Clima
+{
+    public Verano()
+    {
+        super();
+    }
+
+    @Override
+    public float lluvia()
+    {
+        float ll = super.getLluvia();
+        return (float) ((ll <= 0.8) ? (ll + 0.2) : 1);
+    }
+
+    @Override
+    public float sol()
+    {
+        float s = super.getSol();
+        return (float) ((s <= 0.8) ? (s + 0.2) : 1);
+    }
+}
+
+public class Otoño extends Clima
+{
+    public Otoño()
+    {
+        super();
+    }
+
+    @Override
+   public  float lluvia()
+    {
+        float ll = super.getLluvia();
+        return (float) ((ll <= 0.90) ? (ll + 0.10) : 1);
+    }
+
+    @Override
+    public float sol()
+    {
+        float s = super.getSol();
+        return (float) ((s >= 0.10) ? (s - 0.10) : 0);
+    }
+}
+
+public class Invierno extends Clima
+{
+    public Invierno()
+    {
+        super();
+    }
+
+    @Override
+    public float lluvia()
+    {
+        float ll = super.getLluvia();
+        return (float) ((ll >= 0.2) ? (ll - 0.2) : 0);
+    }
+
+    @Override
+   public  float sol()
+    {
+        float s = super.getSol();
+        return (float) ((s >= 0.2) ? (s - 0.2) : 0);
+    }
+}
+
+public class Tiempo
+{
+    public static boolean llovera(Date fecha)
+    {
+        float lluvia = -1;
+        switch (fecha.getMonth())
+        {
+            case 2:
+            case 3:
+            case 4:
+                lluvia = new Primavera().lluvia();
+                break;
+            case 5:
+            case 6:
+            case 7:
+                lluvia = new Verano().lluvia();
+                break;
+            case 8:
+            case 9:
+            case 10:
+                lluvia = new Otoño().lluvia();
+                break;
+            case 11:
+            case 0:
+            case 1:
+                lluvia = new Invierno().lluvia();
+                break;
+        }
+        return (lluvia > 0.5);
+    }
+
+    public static float soleado(Date fecha)
+    {
+        float sol = -1;
+        switch (fecha.getMonth())
+        {
+            case 2:
+            case 3:
+            case 4:
+                sol = new Primavera().sol();
+                break;
+            case 5:
+            case 6:
+            case 7:
+                sol = new Verano().sol();
+                break;
+            case 8:
+            case 9:
+            case 10:
+                sol = new Otoño().sol();
+                break;
+            case 11:
+            case 0:
+            case 1:
+                sol = new Invierno().sol();
+                break;
+        }
+        return sol;
+    }
+
+    public static int mes(int estacion)
+    {
+        int mes = -1;
+        switch (estacion)
+        {
+            case 0:
+                mes = 2;
+                break;
+            case 1:
+                mes = 5;
+                break;
+            case 2:
+                mes = 8;
+                break;
+            case 3:
+                mes = 11;
+                break;
+        }
+        return mes;
+    }
+
+    public static int estacion(int mes)
+    {
+        int estacion=-1;
+        switch (mes)
+        {
+            case 2:
+            case 3:
+            case 4:
+                estacion=0;
+                break;
+            case 5:
+            case 6:
+            case 7:
+                estacion=1;
+                break;
+            case 8:
+            case 9:
+            case 10:
+                estacion=2;
+                break;
+            case 11:
+            case 0:
+            case 1:
+                estacion=3;
+                break;
+        }
+        return estacion;
+    }
+}
+
+public class Lecturas
+{
+    private static InputStreamReader isr = new InputStreamReader(System.in);
+    private static BufferedReader br = new BufferedReader(isr);
+
+    public static int entero()
+    {
+        try
+        {
+            return Integer.parseInt(br.readLine());
+        } catch (Exception ex)
+            System.err.println("Error al leer entero..." + ex.toString());
+        }
+        return 0;
+    }
+
+    public static String cadena()
+    {
+        try
+        {
+            return br.readLine();
+        } catch (Exception ex)
+        {
+            System.err.println("Error al leer cadena... " + ex.toString());
+        }
+        return "";
+    }
+    
+    public static char caracter()
+    {
+        char c=' ';
+        try
+        {
+            c=(char) br.read();
+            String s=br.readLine();
+        } catch (Exception ex)
+        {
+            System.out.println("Error al leer caracter... "+ex.toString());
+        }
+        return c;
+    }
+}
