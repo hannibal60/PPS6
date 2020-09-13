@@ -1,0 +1,117 @@
+Inicio de programa
+
+bandera continua = verdadero
+entero rosas = 0
+entero hora =0
+entero nivel de agua = 100
+entero nivel de abono = 100
+entero nivel de humedad = 100
+cadena crecimiento = ""
+
+Hacer
+
+    Si botón de llenado de agua es presionado
+    Entonces 
+    regar agua ()
+
+    Fin si 
+
+    Si botón de llenado de abono es presionado
+    Entonces 
+    abonar ()
+
+    Fin si
+
+    Si nivel de abono es menor a 20 o nivel de agua es menor a 20
+    Entonces 
+    
+    alarma()
+    Fin si
+    Hacer
+
+         Hacer 
+
+           esperar(700 milisegundos)
+           hora++
+
+           Mientras (hora sea distinto de 24)
+
+           Si (hora es mayor a 24)
+           Entonces 
+
+           día++;
+           nivel de agua = nivel de agua - 6
+           humedad = nivel de agua
+           Fin si
+
+            Si(semana == 2 o semana == 4 o semana == 6 o  semana == 8 )
+            entonces 
+            nivel de abono = nivel de abono - 40
+            Fin si 
+
+            Si semana es igual a 2) entonces 
+
+            crecimiento = "inicial"
+
+            Sino entonces 
+
+            Si (semana es igual 4) entonces
+
+            crecimiento = "intermedio"
+
+            Sino entonces 
+
+            Si (semana es igual 6) entonces
+
+            crecimiento = "avanzado" 
+
+            Sino entonces 
+
+            crecimiento = "marchitado"
+            Fin si 
+
+            Si (día es mayor a 7) entonces
+
+            semana++
+            Fin si
+
+     Mientras(semana sea distinta de 8)
+
+     rosas++;
+     semana=1;
+
+Mientras(continua sea igual a verdadero)
+
+Fin de programa
+
+
+Metodo regar agua
+
+  para (entero nivel = obtener nivel de agua hasta 100 con paso 1)
+
+         nivel de agua ++;
+         esperar(100 milisegundos)
+  Fin para
+Fin método 
+
+
+Método abonar 
+
+ para (entero nivel abono= obtener nivel de abono hasta 100 con paso 1)
+
+         nivel de abono ++;
+         esperar(100 milisegundos)
+ Fin para 
+Fin método 
+
+Método alarma
+
+ para (entero tiempo = 0 hasta 100 con paso 1)
+
+ Reproducir sonido de alarma 
+
+ Esperar (500 milisegundos
+
+ Fin para 
+
+Fin método 
