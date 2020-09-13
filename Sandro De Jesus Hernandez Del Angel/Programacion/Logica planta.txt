@@ -1,0 +1,150 @@
+El programa fue desarrollado en JAVA.
+
+Mi planta crece .2 cm diarios.
+La tempertura varia cada dia y va desde los 15° hasta los 35°
+El nivel de humedad aumenta con un boton y agrega .
+El nivel del humedad disminuye segun la temperatura del dia, mas calor, mas agua consume.
+A esta planta le puede o no crecer hojas entre el dia 14 y 15.
+Pierde hojas aproximadamente entre los dias 40 y 44.
+El tamaño maximo de la planta son 40 cm.
+Un factor que influye en la vida de la planta es la humedad, para que la planta se conserve 
+	sana hay que mantener la humedad entre los valores,36 y 69.
+	Si la humedad es baja o muy alta la vida disminuye, esto por que la planta puede
+	podrirse o secarse.
+Si la vida llega a 0 la planta ha muerto.
+
+/////////////////////////////////////////////
+Programa:
+package interfaz;
+
+import java.text.DecimalFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * @author saipr
+ */
+public class Principal extends javax.swing.JFrame implements Runnable
+{
+
+    int dia, temp, vida = 99, hojas;
+    float humedad = 50;
+    double tamaño = 0.1;
+    String estado;
+    Thread hilin;
+    DecimalFormat dF = new DecimalFormat("#.0");
+
+	//Comienza el programa.
+    public Principal()
+    {
+        initComponents();
+        hilin = new Thread(this);
+        hilin.start();
+    }
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)                                         
+    {                                             
+        /**
+         * Agua del 0 al 99 01 - 35 Poca agua 36 - 69 Agua correcta 70 - 99
+         * Pasado de agua
+         */
+        float hume = humedad + 5;
+        if (hume < 100)
+        {
+            humedad += 5;
+            if (humedad >= 1 && humedad <= 35) //Poca agua
+            {
+                lblIndicadorHumedad.setText("Poca agua!!");
+            } else if (humedad >= 36 && humedad <= 69)
+            {
+                lblIndicadorHumedad.setText("Agua correcta");
+            } else
+            {
+                lblIndicadorHumedad.setText("Exceso de agua!!");
+            }
+            lblHumedad.setText(String.valueOf(dF.format(humedad)));
+        }
+    }                                        
+
+	//Analiza que mientras tenga vida la planta, esta seguira creciendo.
+    @Override
+    public void run()
+    {
+        //Thread ct = Thread.currentThread();
+        while (vida >= 1)
+        {
+            desp();
+            try
+            {
+                Thread.sleep(3000); //3 segundos para que pase un día
+            } catch (InterruptedException ex)
+            {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        System.out.println("Has perdido, pero tu planta ha sobrevivido " + dia + " días.");
+    }
+
+	//Metodo para desplegar toda la informacion 
+    public void desp()
+    {
+        //Desplega temperatura del día
+        temp = ((int) (Math.random() * 22)) + 14; //Desde 15 hasta 35 grados
+        lblTemp.setText(String.valueOf(temp) + "°");
+        //Desplega el dia
+        dia++;
+        lblDia.setText(String.valueOf(dia));
+        //Desplega agua (Humedad) y estado de la planta y vida
+        humedad = (float) (humedad - temp * 0.1); //Indice 0.1, mas calor mas agua consume
+        if (humedad <= 0)
+        {
+            lblHumedad.setText("0.0");
+        } else
+        {
+            if (humedad >= 1 && humedad <= 35) //Poca agua
+            {
+                vida -= 5;
+                lblIndicadorHumedad.setText("Poca agua!!");
+                lblEstado.setText("Secándose");
+            } else if (humedad >= 36 && humedad <= 69)
+            {
+                vida++;
+                lblIndicadorHumedad.setText("Agua correcta");
+                lblEstado.setText("Todo bien");
+            } else
+            {
+                vida -= 5;
+                lblIndicadorHumedad.setText("Exceso de agua!!");
+                lblEstado.setText("Pudriéndose");
+            }
+            lblHumedad.setText(String.valueOf(dF.format(humedad)));
+        }
+        if (vida > 99)
+        {
+            vida = 99;
+        } else if (vida < 0 || humedad <= -15)
+        {
+            vida = 0;
+        }
+        lblVida.setText(vida + "%");
+        //Desplega hojas
+        int ind = (int) (Math.random() * 5) + 11;
+        if (dia % ind == 0 && hojas < 23) //Entre el día 12 y 15 nacen hojitas
+        {
+            hojas++;
+            lblHojas.setText(String.valueOf(hojas));
+        }
+        ind = (int) (Math.random() * 5) + 39;
+        if (dia % ind == 0 && hojas > 0)//Entre el dia 40 y 44 cae una hojita
+        {
+            hojas--;
+            lblHojas.setText(String.valueOf(hojas));
+        }
+        //Desplega Tamaño
+        if (dia % 2 == 0 && tamaño < 40)
+        {
+            tamaño += 0.2; //Crece 2 milimetros
+            lblTamanio.setText(String.valueOf(dF.format(tamaño)) + " cm");
+        }
+    }
+}
