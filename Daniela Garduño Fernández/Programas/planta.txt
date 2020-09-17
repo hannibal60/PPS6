@@ -1,0 +1,91 @@
+Objetivo: hacer crecer una planta
+Flor de cempasúchil
+Datos recopilados:
+¿Qué es un cultivo hidropónico?
+El cultivo hidropónico es aquel que prescinde totalmente de la tierra para cultivar los alimentos. 
+
+Características de la planta 
+•	Altura: 60 cm a 1 m
+•	Clima: calido,semicalido,seco y templado 
+•	Cultivo empieza en junio para que estén listas en octubre y noviembre eso equivale a 5 meses.
+•	Siembra: Siembra indirecta: se siembra en un semillero de foamy agrícola porque se facilita el transplante y reduce el daño a la raíz, este foamy se moja un poco.
+•	Germinación:La germinación se produce entre 7 y 10 dias, primero se verán dos cotiledones, después saldrá el primer par de hojas, se les agregará solución nutritiva, primero un tercio y después aumentar poco a poco.
+•	Trasplante: Cuando las plántulas tengan de 3-4 pares de hojas y midan 12-15 cm se podrán trasplantar a una bolsa agrícola se le agregara un poco de solución nutritiva y un poco de agua.
+•	Podar: Ayuda a la floración y el desarrollo, se quita la yema superior para que las yemas laterales ramifiquen 
+•	Podas de hojas: Se inicia la poda de hojas, eliminando las hojas enfermas, se le coloca solo un poco de agua||Se eliminan las flores enfermas y viejas para no dañar a las demás
+•	Floración: Inicia a los 60 – 70 días de la floración y después dura un mes 
+•	Riego: El riego debe ser suficientemente intenso, pero solo se debe humedecer el suelo, se aplican 450 ml de solución al día por cada planta 
+•	Cosecha: Flor se debe cosechar a partir de los 90-120 días, se cortan a la altura del suelo 
+
+
+
+
+Lógica que seguiré, pienso crear un tipo tamagochi, donde se marquen los niveles de cada propiedad de la planta, pienso meter un Do-while para que revise cada día que durara 24 minutos si la planta tuvo lo necesario y está bien o morirá, en caso de que muera se saldrá del ciclo, también pienso crear un menú donde no nos permita ir aportando vida a cada una de las propiedades, todas estas propiedades se mandaran a traer a la principal.
+Primero tuve que revisar el crecimiento de una planta de cempasúchil y cuál era el proceso, considerando el tamaño en el que crece será el procedimiento, la planta crece 1.5 m como máximo si crece mandare un mensaje donde diga que es hora de cosechar, el temporizador lo usare como contador de días, tomando en cuenta que la planta crece en 120 dias, y considerando todos los parámetros, se mandaran advertencias, tomare cases, para saber si se quiere regar, y tomando en cuenta que se rego de más mandar alertas donde diga que ya está por ahogarse.
+
+Parámetros
+Agua 0-1lt
+Cada hora se va a reducir 41.66ml
+Temperatura -12-24°
+Si ¿solar>-12? entonces la temperatura aumenta.
+Si no disminuye
+
+Nutrientes 7 a 20 días 12x7= 84 minutos
+Cada día que crece…primera semana crece 15 cm, después sigue creciendo 8.2 por dia aproximadamente
+
+1 hora es igual a 1minuto
+ Un día = 24 min
+Lapsos de tiempo, voy a crear un temporizador con timer 
+
+
+Clase planta
+Float agua;// <0 pero 1.50<
+Boolean nutrientes; 
+Float tamaño;// pondré como límite máximo 1.5 se sabrá cuando cosechar
+Float temperatura;// <-12 y> 24
+Float horaSol; //las horas del sol es de 8 
+Boolean vida=true;
+//Aquí van los getters and setters
+//Método para revisar  la vida del cempasuchil
+Boolean TVida(int dias)// los dias si se van a contar como enteros 
+{
+	If(nutrientes (int dias), Watherlevel(),){
+		
+}else{
+	
+}
+}
+
+
+
+//Método para validar nutrientes
+Boolean Nutrientees(días)
+{
+	If(dias<84 && nutrientes){
+		Return true;
+}
+	Else{
+		Return false;
+}
+}
+
+Boolean NAgua ()
+{
+	If(agua>.49 && agua<1.1) {
+		Return true;
+}
+	Else{
+		Return false;
+}
+}
+
+Boolean LMS(horaSol)
+{
+	If(horaSol>1 && horaSol<8)
+{
+	Return true;
+}else{
+	Return false;
+}
+}
+
