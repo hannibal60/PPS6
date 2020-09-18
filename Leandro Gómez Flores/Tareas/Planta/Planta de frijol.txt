@@ -1,0 +1,566 @@
+Planta de frijol:
+
+La planta de frijol puede plantar en diferentes lugares
+ya sea en un algodón o en tierra.
+en las investigaciones lo más importante que se tiene que tomar en cuenta
+es la humedad ya que si esta está muy húmeda se empieza a morir o de lo contrario
+si no está seca igual morirá.
+
+Lógica comprendida:
+
+Clima:
+- La semilla al igual que la planta no sobrevive a temperaturas muy Frías
+ni tampoco a climas tan calurosos.
+Para que la planta crezca a sana debe que estar a una media de 38°c
+
+La germinación de la semilla:
+- Si la semilla está en el clima se da cuando, que la humedad este en su rango.
+Si la semilla está en épocas muy frías esta tardara más tiempo en germinar
+aproximadamente se tardará 14 a 18 días. sin embargo, cuando esta entre 15 a 38°
+la germinación tardara en 6 a 8 días.
+
+Crecimiento de la planta:
+- Para llegar a ser adulta esta tardara aproximadamente 3 meses, dependiendo de la temperatura
+de igual forma como la germinación si está en temperaturas muy frías tardara en crecer.
+
+Pseudocódigo:
+
+////////////////////////////////////////////////
+
+    private String vClima = "";
+    private float vAgua = 0;
+    private float vHumedad = 50;
+    private String vCrecimiento[] =
+    {
+        "Bebe", "Niño", "Joven", "Adulto", "Viejo"
+    };
+    int vSalud = 100;
+    int vGradosDia;
+    String vEstado[] =
+    {
+        "Germinación", "Crecimiento", "Floración", "Cosechar"
+    };
+
+    private int vTiempoEspera = 1500;
+////////////////////////////////////////////////
+    int vMes = 1;
+    int vDiaM = 1;
+
+    java.awt.Frame vFrame;
+    javax.swing.JButton vBotonCosechaH;
+
+    /**
+     * @param args the command line arguments
+     */
+    private javax.swing.JTextArea vTextArea;
+
+    public PlantaFrijol(javax.swing.JTextArea vTextArea, int vMes, int vDia)
+    {
+        this.vTextArea = vTextArea;
+        this.vMes = vMes;
+        this.vDiaM = vDia;
+    }
+
+    boolean vCosecha = false;
+    boolean vGerminacionLenta = false;
+    boolean vCambioClima = false;
+    int vClimaNum; //0 es helado, 1 frio, 2 fresca, 3 comoda, 4 caliente
+    int vConteoGerminacion = 0;
+    int vConteoCrecimiento = 0;
+    int vConteoMes = 0;
+    boolean vMuerta = false;
+    int vNumDiasGermina = 0;
+
+    public void mIniciar()
+    {
+        do
+        {
+            for (int i = vMes; i <= 12; i++)
+            {
+
+                if (!vMuerta)
+                {
+                    switch (i)
+                    {
+                        case 4:
+                            if (!vCambioClima)
+                            {
+                                vCambioClima = true;
+                                vClima = "Comoda | 18° a 24°";
+                                vGradosDia = (int) (Math.random() * (24 - 18 + 1) + 18);
+                            }
+                        case 6:
+                            if (!vCambioClima)
+                            {
+                                vCambioClima = true;
+                                vClima = "Comoda | 18° a 24°";
+                                vGradosDia = (int) (Math.random() * (24 - 18 + 1) + 18);
+                            }
+                        case 9:
+                            if (!vCambioClima)
+                            {
+                                vCambioClima = true;
+                                vClima = "Comoda | 18° a 24°";
+                                vGradosDia = (int) (Math.random() * (24 - 18 + 1) + 18);
+                            }
+                            vClimaNum = 3;
+                        case 11:
+                            if (!vCambioClima)
+                            {
+                                vCambioClima = true;
+                                vClima = "Fria | 7° a 13°";
+                                vGradosDia = (int) (Math.random() * (13 - 7 + 1) + 7);
+                                vGerminacionLenta = true;
+                                vClimaNum = 1;
+                            }
+                            for (int j = vDiaM; j < 30; j++)
+                            {
+                                mPlantaFrijol(i, j);
+                                if (vMuerta)
+                                {
+                                    break;
+                                }
+                            }
+                            break;
+                        case 1:
+                            if (!vCambioClima)
+                            {
+                                vCambioClima = true;
+                                vClima = "Helado | -9°";
+                                vGradosDia = -(int) (Math.random() * (9 - 0 + 1) + 0);
+                                vGerminacionLenta = true;
+                                vClimaNum = 0;
+                            }
+                        case 3:
+                            if (!vCambioClima)
+                            {
+                                vCambioClima = true;
+                                vClima = "Fria | 7° a 13°";
+                                vGradosDia = (int) (Math.random() * (13 - 7 + 1) + 7);
+                                vGerminacionLenta = true;
+                                vClimaNum = 1;
+                            }
+                        case 5:
+                            if (!vCambioClima)
+                            {
+                                vCambioClima = true;
+                                vClima = "Caliente | 24° a 29°";
+                                vGradosDia = (int) (Math.random() * (24 - 18 + 1) + 18);
+                                vClimaNum = 4;
+                            }
+                        case 7:
+                        case 8:
+                            if (!vCambioClima)
+                            {
+                                vCambioClima = true;
+                                vClima = "Comoda | 18° a 24°";
+                                vGradosDia = (int) (Math.random() * (24 - 18 + 1) + 18);
+                                vClimaNum = 3;
+                            }
+                        case 10:
+                            if (!vCambioClima)
+                            {
+                                vCambioClima = true;
+                                vClima = "Fresca | 13° a 18°";
+                                vGradosDia = (int) (Math.random() * (18 - 13 + 1) + 13);
+                                vClimaNum = 2;
+                            }
+                        case 12:
+                            if (!vCambioClima)
+                            {
+                                vCambioClima = true;
+                                vClima = "Helado | -9°";
+                                vGradosDia = -(int) (Math.random() * (9 - 0 + 1) + 0);
+                                vGerminacionLenta = true;
+                                vClimaNum = 0;
+                            }
+                            for (int j = vDiaM; j < 31; j++)
+                            {
+                                mPlantaFrijol(i, j);
+                                if (vMuerta)
+                                {
+                                    break;
+                                }
+                            }
+                            break;
+                        case 2:
+                            if (!vCambioClima)
+                            {
+                                vCambioClima = true;
+                                vClima = "Muy fria | 0° a 7°";
+                                vGradosDia = (int) (Math.random() * (7 - 0 + 1) + 0);
+                                vGerminacionLenta = true;
+                                vClimaNum = 5;
+                            }
+                            for (int j = vDiaM; j < 28; j++)
+                            {
+                                mPlantaFrijol(i, j);
+                                if (vMuerta)
+                                {
+                                    break;
+                                }
+                            }
+                            break;
+                        default:
+                            System.out.println("Error de dia");
+                    }
+                    vDiaM = 1;
+                    vCambioClima = false;
+                } else
+                {
+                    new CMuerta(vFrame, true).setVisible(true);
+                    break;
+                }
+                if (vConteoGerminacion >= vNumDiasGermina)
+                {
+                    vConteoMes++;
+
+                }
+            }
+            if (vMuerta)
+            {
+                vTextArea.setText("	               Game over\n"
+                        + "\n"
+                        + "\n"
+                        + "                          Tú planta sirve para composta");
+                break;
+            }
+            vMes = 1;
+        } while (true);
+
+    }
+
+    boolean vGer = false;
+
+    String vTexto = "";
+
+    private void mPlantaFrijol(int vMes, int vDia)
+    {
+        if (!vGer)
+        {
+            if (vGerminacionLenta)
+            {
+                vNumDiasGermina = (int) (Math.random() * (30 - 15 + 1) + 15);
+            } else
+            {
+                vNumDiasGermina = (int) (Math.random() * (14 - 4 + 1) + 4);
+            }
+            vGer = true;
+        }
+
+        if (vSalud <= 0)
+        {
+            vSalud = 0;
+            vMuerta = true;
+        }
+        vHumedad += vAgua * 10;
+        vAgua = 0;
+
+        if (vHumedad < 50)
+        {
+            switch ((int) vHumedad)
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                    vSalud -= Math.random() * 40 + 1;
+                    break;
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+                    vSalud -= Math.random() * 25 + 1;
+                    break;
+                case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                case 25:
+                case 26:
+                case 27:
+                case 28:
+                case 29:
+                    vSalud -= Math.random() * 10 + 1;
+                    break;
+                case 30:
+                case 31:
+                case 32:
+                case 33:
+                case 34:
+                case 35:
+                case 36:
+                case 37:
+                case 38:
+                case 39:
+                    vSalud -= Math.random() * 5 + 1;
+                    break;
+                case 40:
+                case 41:
+                case 42:
+                case 43:
+                case 44:
+                case 45:
+                case 46:
+                case 47:
+                case 48:
+                case 49:
+                case 50:
+                    if (Math.random() * 2 + 1 == 1)
+                    {
+                        System.out.println("if");
+                        vSalud -= Math.random() * 2 + 1;
+
+                    } else
+                    {
+                        vSalud += Math.random() * 5 + 1;
+                        if (vSalud > 100)
+                        {
+                            vSalud = 100;
+                        }
+                    }
+                    break;
+            }
+        } else
+        {
+            if (vHumedad > 50)
+            {
+                switch ((int) vHumedad)
+                {
+                    case 100:
+                    case 91:
+                    case 92:
+                    case 93:
+                    case 94:
+                    case 95:
+                    case 96:
+                    case 97:
+                    case 98:
+                    case 99:
+                        vSalud -= Math.random() * 20 + 1;
+                        break;
+                    case 90:
+                    case 81:
+                    case 82:
+                    case 83:
+                    case 84:
+                    case 85:
+                    case 86:
+                    case 87:
+                    case 88:
+                    case 89:
+                        vSalud -= Math.random() * 15 + 1;
+                        break;
+                    case 80:
+                    case 71:
+                    case 72:
+                    case 73:
+                    case 74:
+                    case 75:
+                    case 76:
+                    case 77:
+                    case 78:
+                    case 79:
+                        vSalud -= Math.random() * 10 + 1;
+                        break;
+                    case 70:
+                    case 61:
+                    case 62:
+                    case 63:
+                    case 64:
+                    case 65:
+                    case 66:
+                    case 67:
+                    case 68:
+                    case 69:
+                        vSalud -= Math.random() * 5 + 1;
+                        break;
+                    case 60:
+                    case 51:
+                    case 52:
+                    case 53:
+                    case 54:
+                    case 55:
+                    case 56:
+                    case 57:
+                    case 58:
+                    case 59:
+                    case 50:
+                        if (Math.random() * 2 + 1 == 1)
+                        {
+                            System.out.println("if");
+                            vSalud -= Math.random() * 2 + 1;
+
+                        } else
+                        {
+                            vSalud += Math.random() * 5 + 1;
+                            if (vSalud > 100)
+                            {
+                                vSalud = 100;
+                            }
+                        }
+                        break;
+                }
+            } else
+            {
+                vSalud += Math.random() * 15 + 1;
+                if (vSalud > 100)
+                {
+                    vSalud = 100;
+                }
+            }
+        }
+        if (vConteoCrecimiento >= 4)
+        {
+            switch (vClimaNum)
+            {
+                case 0://helado
+                    vHumedad += Math.random() * 2 + 1;
+                    break;
+                case 1://frio
+                    vHumedad += Math.random() * 1 + 1;
+                    break;
+                case 2://fresca
+                    if (Math.random() * 2 + 1 == 0)
+                    {
+                        vHumedad += Math.random() * 1 + 1;
+                    } else
+                    {
+                        vHumedad -= Math.random() * 2 + 1;
+                    }
+                    break;
+                case 3://Comoda
+                    if (Math.random() * 2 + 1 == 0)
+                    {
+                        vHumedad += Math.random() * 2 + 1;
+                    } else
+                    {
+                        vHumedad -= Math.random() * 3 + 1;
+                    }
+                    break;
+                case 4://caliente
+                    vHumedad -= Math.random() * 5 + 1;
+                    break;
+                case 5://muy frio
+                    vHumedad += Math.random() * 1 + 1;
+                    break;
+            }
+            vConteoCrecimiento = 0;
+        }
+
+        if (vHumedad >= 100)
+        {
+            vHumedad = 100;
+        } else
+        {
+            if (vHumedad <= 0)
+            {
+                vHumedad = 0;
+            }
+        }
+        if (vConteoGerminacion <= vNumDiasGermina)
+        {
+            vTexto = ""
+                    + "                                    Salud de la planta: " + vSalud + "%\n"
+                    + "\n                                    Mes: " + vMes + "    =====    Dia: " + vDia
+                    + "\n>Clima: " + vClima
+                    + "\n>Grados del dia: " + vGradosDia + "°"
+                    + "\n>Humedad: " + vHumedad
+                    + "\n>Crecimiento: " + vCrecimiento[vConteoMes]
+                    + "\n>Estado: " + vEstado[0];
+            vConteoGerminacion++;
+        } else
+        {
+
+            if (vConteoMes >= 0 && vConteoMes <= 2)
+            {
+                vTexto = ""
+                        + "                                    Salud de la planta: " + vSalud + "%\n"
+                        + "\n                                    Mes: " + vMes + "    =====    Dia: " + vDia
+                        + "\n>Clima: " + vClima
+                        + "\n>Grados del dia: " + vGradosDia + "°"
+                        + "\n>Humedad: " + vHumedad
+                        + "\n>Crecimiento: " + vCrecimiento[vConteoMes]
+                        + "\n>Estado: " + vEstado[1];
+            } else
+            {
+                if (vConteoMes == 3)
+                {
+                    vCosecha = true;
+                    vTexto = ""
+                            + "                                    Salud de la planta: " + vSalud + "%\n"
+                            + "\n                                    Mes: " + vMes + "    =====    Dia: " + vDia
+                            + "\n>Clima: " + vClima
+                            + "\n>Grados de el dia: " + vGradosDia + "°"
+                            + "\n>Humedad: " + vHumedad
+                            + "\n>Crecimiento: " + vCrecimiento[vConteoMes]
+                            + "\n>Estado: " + vEstado[2]
+                            + "\n>La planta esta en estado de floración";
+
+                } else
+                {
+                    if (vConteoMes == 4)
+                    {
+                        vDiaM++;
+                        if (vDiaM == 24)
+                        {
+                            vCosecha = true;
+                            vTiempoEspera = 4000;
+                            vTexto = ""
+                                    + "                                    Salud de la planta: " + vSalud + "%\n"
+                                    + "\n                                    Mes: " + vMes + "    =====    Dia: " + vDia
+                                    + "\n>Clima: " + vClima
+                                    + "\n>Grados de el dia: " + vGradosDia + "°"
+                                    + "\n>Humedad: " + vHumedad
+                                    + "\n>Crecimiento: " + vCrecimiento[vConteoMes]
+                                    + "\n>Estado: " + vEstado[3]
+                                    + "\n>La planta contiene vainas de frijol";
+                            vBotonCosechaH.setVisible(true);
+                        }
+                    } else
+                    {
+                        if (vConteoMes >= 5)
+                        {
+                            vSalud -= (int) (Math.random() * 3 + 1);
+                            vTexto = ""
+                                    + "                                    Salud de la planta: " + vSalud + "%\n"
+                                    + "\n                                    Mes: " + vMes + "    =====    Dia: " + vDia
+                                    + "\n>Clima: " + vClima
+                                    + "\n>Grados de el dia: " + vGradosDia + "°"
+                                    + "\n>Humedad: " + vHumedad
+                                    + "\n>Crecimiento: " + vCrecimiento[4]
+                                    + "\n>Estado: " + vEstado[3]
+                                    + "\n>La planta contiene vainas de frijol"
+                                    + "\n>La planta muere por vieja"
+                                    + "\n>RECOGE TUS FRIJOLES.";
+                            vBotonCosechaH.setBackground(new Color(255,153,153));
+                        }
+                    }
+                }
+            }
+        }
+        vTextArea.setText(vTexto);
+
+        vConteoCrecimiento++;
+        try
+        {
+            Thread.sleep(vTiempoEspera);
+        } catch (InterruptedException ex)
+        {
+            Logger.getLogger(PlantaFrijol.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
