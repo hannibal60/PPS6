@@ -1,0 +1,9 @@
+Realice la practica de Stack Overflow en los 2 tipos de arquitectura (x86, x64 bits), 
+esto con el fin de ver como se comportaba el ambiente en distintos ambientes de sistema, 
+me llamó tanto la atención ya que soy un aficionado a esto, para ello en la practica de 32 bits me apoye 
+usando red2libc además de gdb peda, realice 3 scripts en Python y pude corroborar que ASLR es una farsa, 
+vulnerándolo por completo sacando mi offset con un exploit hecho en Python el cual funciona por fuerza bruta.
+Adicionalmente en 64 bits realice la practica usando r0pbaby, con la ayuda del tutorial y las herramientas 
+facilitadas por el profesor lo cual no se me dificulto para nada después de haber diseñado 3 exploits desde 0. 
+
+Sin mas que decir anexo las pruebas de mi trabajo además de los 4 exploits generados a lo largo de la práctica.
