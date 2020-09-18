@@ -1,0 +1,87 @@
+Parámetros
+Agua 0-1lt
+Cada hora se va a reducir 40 ml
+Temperatura 1-50
+Si ¿solar>12? entonces la temperatura aumenta.
+Si no disminuye
+Nutrientes 84 minutos
+Cada día que crece 1,7 cm (se reduce usando la secuencia fibonacci)
+1 hora es igual a 30s
+ Un día = 12min
+Lapsus de tiempo dados por librería timer
+
+Clase planta
+Float agua;// <0 pero 1.50<
+Boolean nutrientes; 
+Float tamaño;
+Float temperatura;
+Float horaSol;
+Boolean vida=true;
+//Aquí van los getters and setters
+//Método para validar la vida de la planta
+Boolean ItsaLife(int dias)
+{
+	If(Nutrileche(int dias), Watherlevel(),Termo(),temperatura>=12 && temperatura<=24){
+		Crecer();
+		Reloj(dias);
+}else{
+	Sout(“F se murió :C”);
+}
+}
+
+//Ejecucion
+
+do
+{
+	ItsaLife(int días);
+	Regar();
+	Nutrir();
+	Solear();
+	Tamaño();
+}while(dias<100)
+
+Regar()
+{
+	agua+=40ml;
+}
+
+Nutrir()
+{
+	nutrientes=true;
+}
+
+Solear()
+{
+	horaSol++;
+}
+
+//Método para validar nutrientes
+Boolean Nutrileche(días)
+{
+	If(dias<84 && nutrientes){
+		Return true;
+}
+	Else{
+		Return false;
+}
+}
+
+Boolean Watherlevel()
+{
+	If(agua>.49 && agua<1.1) {
+		Return true;
+}
+	Else{
+		Return false;
+}
+}
+
+Boolean Termo(horaSol)
+{
+	If(horaSol>4 && horaSol<12)
+{
+	Return true;
+}else{
+	Return false;
+}
+}
