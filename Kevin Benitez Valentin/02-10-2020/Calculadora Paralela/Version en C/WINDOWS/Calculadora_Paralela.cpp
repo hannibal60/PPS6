@@ -113,7 +113,7 @@ int main()
 			printf("Segundo numero a operar:\n");
 			fflush(stdin);
 			//__fpurge(stdin);
-			if(scanf("%f",&global[1]))
+			if(scanf("%f",&global[1])==1)
 			{
 				n2c=true;
 			}else

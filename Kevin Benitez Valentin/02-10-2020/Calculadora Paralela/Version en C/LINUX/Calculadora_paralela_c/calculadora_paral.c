@@ -15,7 +15,7 @@ void *hilo_suma(void *args)
 	sum = n1+n2;
 	sleep(2);
 	printf("\t%.2f + %.2f = %.2f\n",n1,n2,sum);
-	
+
 	return NULL;
 
 }
@@ -28,10 +28,8 @@ void *hilo_resta(void *args)
 	resta = n1-n2;
 	sleep(2);
 	printf("\t%.2f - %.2f = %.2f\n",n1,n2,resta);
-	
+
 	return NULL;
-
-
 }
 void *hilo_multi(void *args)
 {
@@ -41,13 +39,10 @@ void *hilo_multi(void *args)
 	multi = n1*n2;
 	sleep(2);
 	printf("\t%.2f * %.2f = %.2f\n",n1,n2,multi);
-	
+
 	return NULL;
-
-
-
-
 }
+
 void *hilo_divi(void *args)
 {
 	float n1,n2,divi;
@@ -75,11 +70,7 @@ void *hilo_divi(void *args)
 			}
 		}
 	}
-	
 	return NULL;
-
-
-
 }
 
 int main()
@@ -89,10 +80,10 @@ int main()
 	char c;
 	bool n1c=false;
 	bool n2c=false;
-	
+
 	do
 	{
-		
+
 		seguir=true;
 		divc=false;
 		n1c=false;
@@ -101,7 +92,7 @@ int main()
 		printf("\t\t\t----------------------------------\n");
 		printf("\t\t\t|Calculadora aritmetica paralela |\n");
 		printf("\t\t\t----------------------------------\n");
-		
+
 		do
 		{
 			printf("Primer numero a operar:\n");
@@ -115,13 +106,13 @@ int main()
 				printf("¡Error!, Numero invalido, verifique");
 			}
 		}while(n1c!=true);
-		
+
 		do
 		{
 			printf("Segundo numero a operar:\n");
 			//fflush(stdin);
 			__fpurge(stdin);
-			if(scanf("%f",&global[1]))
+			if(scanf("%f",&global[1])==1)
 			{
 				n2c=true;
 			}else
@@ -129,24 +120,22 @@ int main()
 				printf("¡Error!, Numero invalido, verifique");
 			}
 		}while(n2c!=true);
-		
-		
-	
+
 		printf("\n-----------SUMA-----------\n");
 		pthread_t suma;
 		pthread_create(&suma,NULL,hilo_suma,global);
 		pthread_join(suma,NULL);
-	
+
 		printf("\n----------RESTA------------\n");
 		pthread_t resta;
 		pthread_create(&resta,NULL,hilo_resta,global);
 		pthread_join(resta,NULL);
-	
+
 		printf("\n-------MULTIPLICACION-------\n");
 		pthread_t multi;
 		pthread_create(&multi,NULL,hilo_multi,global);
 		pthread_join(multi,NULL);
-		
+
 		do
 		{
 			if(global[1]!=0 && global[0]!=0)
@@ -168,7 +157,7 @@ int main()
 				scanf("%f",&global[1]);
 			}
 		}while(divc!=true);
-		
+
 		//fflush(stdin); // cambiar por el comando de linux "__fpurge()stdin;"
 		__fpurge(stdin);
 		printf("Desea realizar de nuevo las operaciones.. S/N\n");
@@ -178,9 +167,8 @@ int main()
 			seguir=false;
 		}
 	}while(seguir!=false);
-	
-	
+
 	int f = getchar();
-	
+
 	return 0;
 }
