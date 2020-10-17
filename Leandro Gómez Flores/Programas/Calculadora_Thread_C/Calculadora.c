@@ -33,7 +33,6 @@ int main()
 
     do
     {
-        //fflush(vNum1);
         printf("Dame el primer numero: ");
         __fpurge(stdin);
         if (scanf(" %f", &vNum1) == 1)
@@ -68,14 +67,13 @@ int main()
     pthread_t vHiloD;
 
     pthread_create(&vHiloS, NULL, mSuma, NULL);
+    sleep(1/100);
     pthread_create(&vHiloR, NULL, mResta, NULL);
+    sleep(1/100);
     pthread_create(&vHiloM, NULL, mMultiplicar, NULL);
+    sleep(1/100);
     pthread_create(&vHiloD, NULL, mDividir, NULL);
-
-    //mSuma();
-    /*mMultiplicar(vNum1, vNum2);
-    mResta(vNum1, vNum2);
-    mSuma(vNum1, vNum2);*/
+    sleep(1/100);
 
     printf("\nEsto no es un hilito : Los datos que me diste %.3f , %.3f \n\n", vNum1, vNum2);
 
@@ -128,16 +126,3 @@ void *mDividir(void *parametro)
         }
     }
 }
-
-/*int *mValidarFloat(float vNum)
-{
-    __fpurge(stdin);
-    if (scanf(" %f", &vNum) == 1)
-    {
-        return 0;
-    } else
-    {
-        printf("\nError, se esperaba un numero\n");
-        return 1;
-    }
-}*/
