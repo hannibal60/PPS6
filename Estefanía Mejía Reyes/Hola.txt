@@ -1,0 +1,22 @@
+CRECIMIENTO PLANTA
+
+En este programa se desea simular el crecimiento de una planta.
+Consideramos los siguientes elementos: Para que una planta creza influyen varios factores:
+Clima: Frío, Calido, templado
+Suelo: a tierra o el suelo ayuda a la planta para crecer y desarrollarse ya que contiene los nutrientes que la planta necesita para crecer y vivir
+Aire: Para que las plantas puedan respirar necesitan aire. 
+Agua: El agua en las plantas ayuda a producir su propio alimento y tener los nutrientes necesarios
+Luz: las plantas verdes utilizan la luz del sol para subsistir. A partir del sol fabrican su propio alimento.
+
+Consideramos el tipo de planta, conocer sus propiedades.
+
+Programa simulación crecimiento de planta
+
+
+La plata será una variable que irá incrementando a traves de un contador
+Cada característica será una variable que tendrá un valor
+Cada cierto tiempo se debe regar la planta. Entonces por cada vez que se 
+quiera poner agua irá aumentando y así con cada elemento
+
+Esto será dentro de un do-while que permite hace iteraciones hasta que
+la planta termine su crecimiento 

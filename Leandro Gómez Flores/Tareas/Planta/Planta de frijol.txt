@@ -23,53 +23,63 @@ Crecimiento de la planta:
 - Para llegar a ser adulta esta tardara aproximadamente 3 meses, dependiendo de la temperatura
 de igual forma como la germinación si está en temperaturas muy frías tardara en crecer.
 
+---------------------------------------------------------------------------------------------------------------
+Contenido del pseudocódigo (Clases):
+1. CPlanta....................... Linea 36
+2. CHumedad...................... Linea 298
+3. CCrecimiento.................. Linea 494
+4. CTexto........................ Linea 546
+
 Pseudocódigo:
 
-////////////////////////////////////////////////
+*************************************************************************
+public class CPlanta
+{
 
-    private String vClima = "";
-    private float vAgua = 0;
-    private float vHumedad = 50;
-    private String vCrecimiento[] =
+////////////////////////////////////////////////
+    public static String vClima = "";
+    public static float vAgua = 0;
+    public static float vHumedad = 50;
+    public static String vCrecimiento[] =
     {
         "Bebe", "Niño", "Joven", "Adulto", "Viejo"
     };
-    int vSalud = 100;
-    int vGradosDia;
-    String vEstado[] =
+    static int vSalud = 100;
+    static int vGradosDia;
+    static String vEstado[] =
     {
         "Germinación", "Crecimiento", "Floración", "Cosechar"
     };
 
-    private int vTiempoEspera = 1500;
+    public static int vTiempoEspera = 1500;
 ////////////////////////////////////////////////
-    int vMes = 1;
-    int vDiaM = 1;
+    static int vMes = 1;
+    static int vDiaM = 1;
 
-    java.awt.Frame vFrame;
-    javax.swing.JButton vBotonCosechaH;
+    static java.awt.Frame vFrame;
+    static javax.swing.JButton vBotonCosechaH;
 
     /**
      * @param args the command line arguments
      */
-    private javax.swing.JTextArea vTextArea;
+    static private javax.swing.JTextArea vTextArea;
 
-    public PlantaFrijol(javax.swing.JTextArea vTextArea, int vMes, int vDia)
+    public CPlanta(javax.swing.JTextArea vTextArea, int vMes, int vDia)
     {
         this.vTextArea = vTextArea;
         this.vMes = vMes;
         this.vDiaM = vDia;
     }
 
-    boolean vCosecha = false;
-    boolean vGerminacionLenta = false;
-    boolean vCambioClima = false;
-    int vClimaNum; //0 es helado, 1 frio, 2 fresca, 3 comoda, 4 caliente
-    int vConteoGerminacion = 0;
-    int vConteoCrecimiento = 0;
-    int vConteoMes = 0;
-    boolean vMuerta = false;
-    int vNumDiasGermina = 0;
+    static boolean vCosecha = false;
+    static boolean vGerminacionLenta = false;
+    static boolean vCambioClima = false;
+    static int vClimaNum; //0 es helado, 1 frio, 2 fresca, 3 comoda, 4 caliente
+    static int vConteoGerminacion = 0;
+    static int vConteoCrecimiento = 0;
+    static int vConteoMes = 0;
+    static boolean vMuerta = false;
+    static int vNumDiasGermina = 0;
 
     public void mIniciar()
     {
@@ -80,6 +90,7 @@ Pseudocódigo:
 
                 if (!vMuerta)
                 {
+                    System.out.println("Holas");
                     switch (i)
                     {
                         case 4:
@@ -219,10 +230,10 @@ Pseudocódigo:
             }
             if (vMuerta)
             {
-                vTextArea.setText("	               Game over\n"
+                vTextArea.setText("	        Game over\n"
                         + "\n"
                         + "\n"
-                        + "                          Tú planta sirve para composta");
+                        + "                   Tú planta sirve para composta");
                 break;
             }
             vMes = 1;
@@ -230,9 +241,9 @@ Pseudocódigo:
 
     }
 
-    boolean vGer = false;
+    static boolean vGer = false;
 
-    String vTexto = "";
+    static String vTexto = "";
 
     private void mPlantaFrijol(int vMes, int vDia)
     {
@@ -256,6 +267,53 @@ Pseudocódigo:
         vHumedad += vAgua * 10;
         vAgua = 0;
 
+        CHumedad.mHumedad();
+
+        CCrecimiento.mCrecimiento();
+
+        CHumedad.mHumedadC();
+
+        CTexto.mMostrarTexto(vMes, vDia);
+
+        vTextArea.setText(vTexto);
+
+        vConteoCrecimiento++;
+        try
+        {
+            Thread.sleep(vTiempoEspera);
+        } catch (InterruptedException ex)
+        {
+            Logger.getLogger(CPlanta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+}
+*************************************************************************
+import static PFuncion.CPlanta.*;
+
+/**
+ *
+ * @author leand
+ */
+public class CHumedad
+{
+
+    public static void mHumedadC()
+    {
+        if (vHumedad >= 100)
+        {
+            vHumedad = 100;
+        } else
+        {
+            if (vHumedad <= 0)
+            {
+                vHumedad = 0;
+            }
+        }
+    }
+
+    public static void mHumedad()
+    {
         if (vHumedad < 50)
         {
             switch ((int) vHumedad)
@@ -321,7 +379,7 @@ Pseudocódigo:
                 case 50:
                     if (Math.random() * 2 + 1 == 1)
                     {
-                        System.out.println("if");
+
                         vSalud -= Math.random() * 2 + 1;
 
                     } else
@@ -401,7 +459,7 @@ Pseudocódigo:
                     case 50:
                         if (Math.random() * 2 + 1 == 1)
                         {
-                            System.out.println("if");
+
                             vSalud -= Math.random() * 2 + 1;
 
                         } else
@@ -423,6 +481,21 @@ Pseudocódigo:
                 }
             }
         }
+    }
+}
+
+*************************************************************************
+import static PFuncion.CPlanta.*;
+
+/**
+ *
+ * @author leand
+ */
+public class CCrecimiento
+{
+
+    public static void mCrecimiento()
+    {
         if (vConteoCrecimiento >= 4)
         {
             switch (vClimaNum)
@@ -460,22 +533,26 @@ Pseudocódigo:
             }
             vConteoCrecimiento = 0;
         }
+    }
+}
+*************************************************************************
+import static PFuncion.CPlanta.*;
+import java.awt.Color;
 
-        if (vHumedad >= 100)
-        {
-            vHumedad = 100;
-        } else
-        {
-            if (vHumedad <= 0)
-            {
-                vHumedad = 0;
-            }
-        }
+/**
+ *
+ * @author leand
+ */
+public class CTexto
+{
+
+    public static void mMostrarTexto(int vMes, int vDia)
+    {
         if (vConteoGerminacion <= vNumDiasGermina)
         {
             vTexto = ""
-                    + "                                    Salud de la planta: " + vSalud + "%\n"
-                    + "\n                                    Mes: " + vMes + "    =====    Dia: " + vDia
+                    + "                    Salud de la planta: " + vSalud + "%\n"
+                    + "\n                    Mes: " + vMes + "    =====    Dia: " + vDia
                     + "\n>Clima: " + vClima
                     + "\n>Grados del dia: " + vGradosDia + "°"
                     + "\n>Humedad: " + vHumedad
@@ -488,8 +565,8 @@ Pseudocódigo:
             if (vConteoMes >= 0 && vConteoMes <= 2)
             {
                 vTexto = ""
-                        + "                                    Salud de la planta: " + vSalud + "%\n"
-                        + "\n                                    Mes: " + vMes + "    =====    Dia: " + vDia
+                        + "                    Salud de la planta: " + vSalud + "%\n"
+                        + "\n                    Mes: " + vMes + "    =====    Dia: " + vDia
                         + "\n>Clima: " + vClima
                         + "\n>Grados del dia: " + vGradosDia + "°"
                         + "\n>Humedad: " + vHumedad
@@ -501,8 +578,8 @@ Pseudocódigo:
                 {
                     vCosecha = true;
                     vTexto = ""
-                            + "                                    Salud de la planta: " + vSalud + "%\n"
-                            + "\n                                    Mes: " + vMes + "    =====    Dia: " + vDia
+                            + "                    Salud de la planta: " + vSalud + "%\n"
+                            + "\n                    Mes: " + vMes + "    =====    Dia: " + vDia
                             + "\n>Clima: " + vClima
                             + "\n>Grados de el dia: " + vGradosDia + "°"
                             + "\n>Humedad: " + vHumedad
@@ -520,8 +597,8 @@ Pseudocódigo:
                             vCosecha = true;
                             vTiempoEspera = 4000;
                             vTexto = ""
-                                    + "                                    Salud de la planta: " + vSalud + "%\n"
-                                    + "\n                                    Mes: " + vMes + "    =====    Dia: " + vDia
+                                    + "                    Salud de la planta: " + vSalud + "%\n"
+                                    + "\n                    Mes: " + vMes + "    =====    Dia: " + vDia
                                     + "\n>Clima: " + vClima
                                     + "\n>Grados de el dia: " + vGradosDia + "°"
                                     + "\n>Humedad: " + vHumedad
@@ -536,8 +613,8 @@ Pseudocódigo:
                         {
                             vSalud -= (int) (Math.random() * 3 + 1);
                             vTexto = ""
-                                    + "                                    Salud de la planta: " + vSalud + "%\n"
-                                    + "\n                                    Mes: " + vMes + "    =====    Dia: " + vDia
+                                    + "                    Salud de la planta: " + vSalud + "%\n"
+                                    + "\n                    Mes: " + vMes + "    =====    Dia: " + vDia
                                     + "\n>Clima: " + vClima
                                     + "\n>Grados de el dia: " + vGradosDia + "°"
                                     + "\n>Humedad: " + vHumedad
@@ -546,21 +623,16 @@ Pseudocódigo:
                                     + "\n>La planta contiene vainas de frijol"
                                     + "\n>La planta muere por vieja"
                                     + "\n>RECOGE TUS FRIJOLES.";
-                            vBotonCosechaH.setBackground(new Color(255,153,153));
+                            vBotonCosechaH.setBackground(new Color(255, 153, 153));
                         }
                     }
                 }
             }
         }
-        vTextArea.setText(vTexto);
-
-        vConteoCrecimiento++;
-        try
-        {
-            Thread.sleep(vTiempoEspera);
-        } catch (InterruptedException ex)
-        {
-            Logger.getLogger(PlantaFrijol.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
     }
+}
+
+*************************************************************************
+*************************************************************************
+*************************************************************************
+*************************************************************************

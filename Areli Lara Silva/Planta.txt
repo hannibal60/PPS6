@@ -1,0 +1,15 @@
+Planta virtual 
+
+Objetivo: Hcer crecer una planta virtual 
+¿Qué requiere una planta para poder crecer?
+-Clima: seco, templado, calido, lluvioso.
+-Tiempo de cultivo: tiempo que transcurre desde que se siembra hasta que crese
+-Lugar donde se siembra la planta
+-Podar: ayuda a que re produsca ramificacion o a que crescan nuevas flores o nuevas hojas
+-Riego: Humedecer la tierra en donde se encuentre la planta, 450 mil aprox.
+
+Creo que la planta podria ser como un contador, en el cual depende a los cuidados hagan que 
+su crecimmiento aumente o muera , poniendo un rango depende al tiempo que lleva la planta, 
+los parametros serian agua , temperatura , sol y al final del dia contar los nutrientes que se 
+recolectaron y de eso ahora si aumentar o diminuir el contador de la planta.
+ 
