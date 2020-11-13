@@ -23,7 +23,7 @@ public final class CProcesos
         this.vConjunto = vConjunto;
         for (int i = 2; i < vConjunto.length; i++)
         {
-            mProcesarInfor(vConjunto, i, 0, new int[i]);
+            mProcesarInfor(vConjunto, new int[i], i, 0);
         }
     }
 
@@ -31,16 +31,22 @@ public final class CProcesos
     {
         for (int i = 0; i < vSubconjuntos.length; i++)
         {
-            System.out.print("Subconjunto:");
+            System.out.print("Subconjunto: {");
             for (int j = 0; j < vSubconjuntos[i].length; j++)
             {
-                System.out.print(" " + vSubconjuntos[i][j]);
+                if (j == vSubconjuntos[i].length-1)
+                {
+                    System.out.print(" " + vSubconjuntos[i][j]); 
+                }else
+                {
+                     System.out.print(" " + vSubconjuntos[i][j]+",");
+                }
             }
-            System.out.println("\n");
+            System.out.println("} = 0\n");
         }
     }
 
-   /* protected void mAgregarResultado(int vNumNuevo)
+    /* protected void mAgregarResultado(int vNumNuevo)
     {
         if (vTmpSubconjunto == null)
         {
@@ -54,37 +60,36 @@ public final class CProcesos
             vTmpSubconjunto = vTmp;
         }
     }*/
-
     protected void mAgregarSubConjunto(int vNuevoSubconjunto[])
     {
         int vTmp[][] = new int[vSubconjuntos.length + 1][vNuevoSubconjunto.length];
-        System.arraycopy(vSubconjuntos, 0, vTmp, 0, vSubconjuntos.length + 1);
-        vTmp[vTmp.length] = vNuevoSubconjunto;
+        System.arraycopy(vSubconjuntos, 0, vTmp, 0, vSubconjuntos.length);
+        vTmp[vTmp.length-1] = vNuevoSubconjunto;
         vSubconjuntos = vTmp;
     }
 
-    protected void mProcesarInfor(int[] arr, int len, int posicion_inicio, int[] vResultado)
+    protected void mProcesarInfor(int[] vConjunto, int[] vSubconjunto, int vLongitud, int vPosInicial)
     {
-        if (len == 0)
+        if (vLongitud == 0)
         {
-            int suma = 0;
+            int vSumar = 0;
 
-            for (int j = 0; j < vResultado.length; j++)
+            for (int i = 0; i < vSubconjunto.length; i++)
             {
-                suma += vResultado[j];
+                vSumar += vSubconjunto[i];
             }
 
-            if (suma == 0)
+            if (vSumar == 0)
             {
-                mAgregarSubConjunto(vResultado);
+                mAgregarSubConjunto(vSubconjunto);
             }
             vConteo++;
             return;
         }
-        for (int i = posicion_inicio; i <= arr.length - len; i++)
+        for (int i = vPosInicial; i <= vConjunto.length - vLongitud; i++)
         {
-            vResultado[vResultado.length - len] = arr[i];
-            mProcesarInfor(arr, len - 1, i + 1, vResultado);
+            vSubconjunto[vSubconjunto.length - vLongitud] = vConjunto[i];
+            mProcesarInfor(vConjunto, vSubconjunto, vLongitud - 1, i + 1);
         }
     }
 }
