@@ -42,6 +42,7 @@ public class FSeleccion extends javax.swing.JFrame
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 210, 157));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -168,10 +169,12 @@ public class FSeleccion extends javax.swing.JFrame
     {//GEN-HEADEREND:event_vBotonComenzarActionPerformed
         if (vToggleParalelo.isSelected())
         {
+            System.out.println("Puchaste el paralelo");
             dispose();
             new FParalelo().setVisible(true);
         } else
         {
+            System.out.println("Puchaste el Estructual");
             dispose();
             new FEstructurado().setVisible(true);
         }

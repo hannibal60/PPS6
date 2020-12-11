@@ -15,30 +15,23 @@ import static pFrame.FParalelo.*;
 public final class CProcesosParalelo extends Thread
 {
 
-    public static final int vProcesos = Runtime.getRuntime().availableProcessors();
-    static int vNumProcesosDisponibles = ((vProcesos / 2) + ((vProcesos / 2) / 2));
     static int vTmpContHilos = 1;
     static int vTerminoHilo = 0;
 
     String vTextSubconjuntoTotal = "";
     String vTextSubconjunto0 = "";
-    String vTextoTamañoConuuntoNumeroCombinacionesTmp;
 
-    long[] vConjunto;
     int i;
 
-    public CProcesosParalelo(long[] vConjunto, int i)
+    public CProcesosParalelo(int i)
     {
-        System.out.println("Para");
-        this.vConjunto = vConjunto;
         this.i = i;
     }
 
-    protected void mProcesarInfor(long[] vConjunto, long[] vSubconjunto, int vLongitud, int vPosInicial)
+    protected void mProcesarInforPP(long[] vSubconjunto, int vLongitud, int vPosInicial)
     {
         if (vLongitud == 0)
         {
-            //mMuestraProceso(vSubconjunto);
             vConteoSubConjTotal++;
             vLabelNumConjunto.setText(vNumCombinaciones + " - " + vConteoSubConjTotal);
 
@@ -56,45 +49,18 @@ public final class CProcesosParalelo extends Thread
             }
             vTextSubconjuntoTotal += "}\n";
 
-            vTextAreaTodoSubconjunto.append(vConteoSubConjTotal + vTextSubconjuntoTotal);
-
-            int vSumar = 0;
-
-            for (int i = 0; i < vSubconjunto.length; i++)
-            {
-                vSumar += vSubconjunto[i];
-                mTiempoFinalPP();
-            }
-
-            if (vSumar == 0)
-            {
-                vConteoSubconjSuma0++;
-                vTextSubconjunto0 = ": {";
-                for (int i = 0; i < vSubconjunto.length; i++)
-                {
-                    if (i == vSubconjunto.length - 1)
-                    {
-                        vTextSubconjunto0 += " " + vSubconjunto[i];
-                    } else
-                    {
-                        vTextSubconjunto0 += vSubconjunto[i] + ", ";
-                    }
-                    mTiempoFinalPP();
-                }
-                vTextSubconjunto0 += "}\n";
-                vTextAreaSubconjuntos0.append(vConteoSubconjSuma0 + vTextSubconjunto0);
-            }
+            vTextAreaTodoSubconjuntoPP.append(vConteoSubConjTotal + vTextSubconjuntoTotal);
             return;
         }
-        for (int i = vPosInicial; i <= vConjunto.length - vLongitud; i++)
+        for (int i = vPosInicial; i <= vConjuntoPP.length - vLongitud; i++)
         {
             mTiempoFinalPP();
             if (vPausar)
             {
                 break;
             }
-            vSubconjunto[vSubconjunto.length - vLongitud] = vConjunto[i];
-            mProcesarInfor(vConjunto, vSubconjunto, vLongitud - 1, i + 1);
+            vSubconjunto[vSubconjunto.length - vLongitud] = vConjuntoPP[i];
+            mProcesarInforPP(vSubconjunto, vLongitud - 1, i + 1);
         }
     }
 
@@ -114,16 +80,17 @@ public final class CProcesosParalelo extends Thread
         System.out.print("}\n");
     }
 
-    ////////////////////////// ^ PARTE LOCAL ^ ////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void run()
     {
-        System.out.println(i);
-        mProcesarInfor(vConjunto, new long[i], i, 0);
+        mProcesarInforPP(new long[i], i, 0);
         vNumTerminaHilo++;
         if (vNumTerminaHilo == vNumLlegarHilo)
         {
+            System.out.println("<<Termine todos los subconjutnos>>");
+            System.out.println("<<Total de hilos terminados: "+vNumTerminaHilo+">>");
+            vLabelTotalPP.setText("Total de subconjuntos: " + vConteoSubConjTotal + " | Subconjuntos que suman 0: " + vConteoSubconjSuma0);
             vBotonDetener.setEnabled(false);
             vBotonGenerador.setEnabled(true);
         }

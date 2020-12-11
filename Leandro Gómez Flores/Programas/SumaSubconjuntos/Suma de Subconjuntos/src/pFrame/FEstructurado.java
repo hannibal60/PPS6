@@ -22,7 +22,6 @@ public class FEstructurado extends javax.swing.JFrame
     {
         initComponents();
         vBotonDetener.setEnabled(false);
-        System.out.println("");
     }
 
     /**
@@ -37,10 +36,6 @@ public class FEstructurado extends javax.swing.JFrame
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        vTextAreaTodoSubconjunto = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        vTextAreaSubconjuntos0 = new javax.swing.JTextArea();
         vBotonGenerador = new javax.swing.JButton();
         vLabelTotal = new javax.swing.JLabel();
         vLabelTiempoEjec = new javax.swing.JLabel();
@@ -56,6 +51,10 @@ public class FEstructurado extends javax.swing.JFrame
         vBotonRegresar = new javax.swing.JButton();
         vLabelNumConjuntoInfo = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        vTextAreaTodoSubconjuntoL = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        vTextAreaSubconjuntos0L = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocationByPlatform(true);
@@ -65,25 +64,6 @@ public class FEstructurado extends javax.swing.JFrame
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jPanel1.setBackground(new java.awt.Color(221, 167, 123));
-
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Todos los subconjuntos", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
-        jScrollPane1.setAutoscrolls(true);
-
-        vTextAreaTodoSubconjunto.setEditable(false);
-        vTextAreaTodoSubconjunto.setColumns(20);
-        vTextAreaTodoSubconjunto.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
-        vTextAreaTodoSubconjunto.setRows(5);
-        vTextAreaTodoSubconjunto.setPreferredSize(new java.awt.Dimension(224, 15));
-        jScrollPane1.setViewportView(vTextAreaTodoSubconjunto);
-
-        jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Subconjunto que su suma da 0", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.TOP));
-
-        vTextAreaSubconjuntos0.setEditable(false);
-        vTextAreaSubconjuntos0.setColumns(20);
-        vTextAreaSubconjuntos0.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
-        vTextAreaSubconjuntos0.setRows(5);
-        vTextAreaSubconjuntos0.setPreferredSize(new java.awt.Dimension(224, 15));
-        jScrollPane2.setViewportView(vTextAreaSubconjuntos0);
 
         vBotonGenerador.setBackground(new java.awt.Color(0, 0, 0));
         vBotonGenerador.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
@@ -105,7 +85,7 @@ public class FEstructurado extends javax.swing.JFrame
         vLabelTiempoEjec.setText("Tiempo de ejecución:");
 
         jLabel1.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
-        jLabel1.setText("Longitud maxima para general: 3 -");
+        jLabel1.setText("Longitud de forma random para general: 3 al");
 
         vTextFileNumMax.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
         vTextFileNumMax.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -207,6 +187,20 @@ public class FEstructurado extends javax.swing.JFrame
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Calculo de subconjuntos Estructural");
 
+        jScrollPane3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Todos los subconjuntos", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+
+        vTextAreaTodoSubconjuntoL.setColumns(20);
+        vTextAreaTodoSubconjuntoL.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
+        vTextAreaTodoSubconjuntoL.setRows(5);
+        jScrollPane3.setViewportView(vTextAreaTodoSubconjuntoL);
+
+        jScrollPane4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Subconjuntos que suman 0", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.TOP));
+
+        vTextAreaSubconjuntos0L.setColumns(20);
+        vTextAreaSubconjuntos0L.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
+        vTextAreaSubconjuntos0L.setRows(5);
+        jScrollPane4.setViewportView(vTextAreaSubconjuntos0L);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -217,17 +211,17 @@ public class FEstructurado extends javax.swing.JFrame
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(vTextFileNumMax)
-                        .addGap(127, 127, 127)
+                        .addComponent(vTextFileNumMax, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(vTextFileNumExacto)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
+                        .addComponent(jScrollPane3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2)
-                        .addGap(17, 17, 17))
+                        .addComponent(jScrollPane4)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(vLabelTiempoEjec, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -269,11 +263,11 @@ public class FEstructurado extends javax.swing.JFrame
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addGap(13, 13, 13)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(vTextFileNumExacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(vTextFileNumExacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(vTextFileNumMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -287,10 +281,12 @@ public class FEstructurado extends javax.swing.JFrame
                 .addComponent(vLabelNumConjunto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(vLabelTotal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jScrollPane3)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
+                        .addGap(1, 1, 1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(vLabelTiempoEjec)
@@ -323,7 +319,9 @@ public class FEstructurado extends javax.swing.JFrame
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -364,8 +362,8 @@ public class FEstructurado extends javax.swing.JFrame
             vNumMax = Long.valueOf(vTextFileNumExacto.getText().trim());
         }
         vTextAreaConjunto.setText("================================Creando Conjunto================================");
-        vTextAreaSubconjuntos0.setText("");
-        vTextAreaTodoSubconjunto.setText("");
+        vTextAreaSubconjuntos0L.setText("");
+        vTextAreaTodoSubconjuntoL.setText("");
 
         //////////
         vLabelTotal.setText("Total de subconjuntos: | Subconjuntos que suman 0: ");
@@ -491,8 +489,8 @@ public class FEstructurado extends javax.swing.JFrame
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     public static javax.swing.JButton vBotonDetener;
     public static javax.swing.JButton vBotonGenerador;
@@ -503,8 +501,8 @@ public class FEstructurado extends javax.swing.JFrame
     public static javax.swing.JLabel vLabelTotal;
     private javax.swing.JScrollPane vScrollConjunto;
     public static javax.swing.JTextArea vTextAreaConjunto;
-    public static javax.swing.JTextArea vTextAreaSubconjuntos0;
-    public static javax.swing.JTextArea vTextAreaTodoSubconjunto;
+    public static javax.swing.JTextArea vTextAreaSubconjuntos0L;
+    public static javax.swing.JTextArea vTextAreaTodoSubconjuntoL;
     private javax.swing.JTextField vTextFileNumExacto;
     private javax.swing.JTextField vTextFileNumMax;
     // End of variables declaration//GEN-END:variables

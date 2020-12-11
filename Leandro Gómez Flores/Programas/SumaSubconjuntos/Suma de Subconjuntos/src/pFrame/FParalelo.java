@@ -12,6 +12,10 @@ import static pGenerarConjunto.CCalcularConvinaciones.mCalcularSubconjuntos;
 import pGenerarConjunto.CGenerar;
 import pProcesoParalelo.CProcesosParalelo;
 
+///////////////////////////////////////////////////////////////////////////
+import static pClases.CFormatoTiempo.*;
+import static pFrame.FParalelo.*;
+
 /**
  *
  * @author leand
@@ -40,12 +44,8 @@ public class FParalelo extends javax.swing.JFrame
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        vTextAreaTodoSubconjunto = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        vTextAreaSubconjuntos0 = new javax.swing.JTextArea();
         vBotonGenerador = new javax.swing.JButton();
-        vLabelTotal = new javax.swing.JLabel();
+        vLabelTotalPP = new javax.swing.JLabel();
         vLabelTiempoEjecPP = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         vTextFileNumMax = new javax.swing.JTextField();
@@ -59,6 +59,10 @@ public class FParalelo extends javax.swing.JFrame
         vLabelNumConjuntoInfo = new javax.swing.JLabel();
         vLabelNumConjunto = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        vTextAreaTodoSubconjuntoPP = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        vTextAreaSubconjuntos0PP = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocationByPlatform(true);
@@ -68,27 +72,6 @@ public class FParalelo extends javax.swing.JFrame
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jPanel1.setBackground(new java.awt.Color(221, 167, 123));
-
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Todos los subconjuntos", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
-        jScrollPane1.setAutoscrolls(true);
-        jScrollPane1.setMinimumSize(new java.awt.Dimension(37, 194));
-
-        vTextAreaTodoSubconjunto.setColumns(20);
-        vTextAreaTodoSubconjunto.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
-        vTextAreaTodoSubconjunto.setRows(5);
-        vTextAreaTodoSubconjunto.setMinimumSize(new java.awt.Dimension(224, 195));
-        vTextAreaTodoSubconjunto.setPreferredSize(new java.awt.Dimension(224, 195));
-        jScrollPane1.setViewportView(vTextAreaTodoSubconjunto);
-
-        jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Subconjunto que su suma da 0", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.TOP));
-
-        vTextAreaSubconjuntos0.setEditable(false);
-        vTextAreaSubconjuntos0.setColumns(20);
-        vTextAreaSubconjuntos0.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
-        vTextAreaSubconjuntos0.setRows(5);
-        vTextAreaSubconjuntos0.setMinimumSize(new java.awt.Dimension(224, 195));
-        vTextAreaSubconjuntos0.setPreferredSize(new java.awt.Dimension(224, 195));
-        jScrollPane2.setViewportView(vTextAreaSubconjuntos0);
 
         vBotonGenerador.setBackground(new java.awt.Color(0, 0, 0));
         vBotonGenerador.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
@@ -102,15 +85,15 @@ public class FParalelo extends javax.swing.JFrame
             }
         });
 
-        vLabelTotal.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
-        vLabelTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        vLabelTotal.setText("Total de subconjuntos: ");
+        vLabelTotalPP.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
+        vLabelTotalPP.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        vLabelTotalPP.setText("Total de subconjuntos: ");
 
         vLabelTiempoEjecPP.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
         vLabelTiempoEjecPP.setText("Tiempo de ejecución:");
 
         jLabel1.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
-        jLabel1.setText("Longitud maxima para general: 3 -");
+        jLabel1.setText("Longitud de forma random para general: 3 al");
 
         vTextFileNumMax.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
         vTextFileNumMax.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -212,6 +195,22 @@ public class FParalelo extends javax.swing.JFrame
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Calculo de subconjuntos en Paralelo");
 
+        jScrollPane3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Todos los subconjuntos", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+
+        vTextAreaTodoSubconjuntoPP.setEditable(false);
+        vTextAreaTodoSubconjuntoPP.setColumns(20);
+        vTextAreaTodoSubconjuntoPP.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
+        vTextAreaTodoSubconjuntoPP.setRows(5);
+        jScrollPane3.setViewportView(vTextAreaTodoSubconjuntoPP);
+
+        jScrollPane4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Subconjuntos que suman 0", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.TOP));
+
+        vTextAreaSubconjuntos0PP.setEditable(false);
+        vTextAreaSubconjuntos0PP.setColumns(20);
+        vTextAreaSubconjuntos0PP.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
+        vTextAreaSubconjuntos0PP.setRows(5);
+        jScrollPane4.setViewportView(vTextAreaSubconjuntos0PP);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -222,23 +221,23 @@ public class FParalelo extends javax.swing.JFrame
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(vTextFileNumMax)
-                        .addGap(127, 127, 127)
+                        .addComponent(vTextFileNumMax, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(vTextFileNumExacto)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2)
-                        .addGap(17, 17, 17))
+                        .addComponent(jScrollPane3)
+                        .addGap(13, 13, 13)
+                        .addComponent(jScrollPane4)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(vLabelTiempoEjecPP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(vBotonDetener)
                         .addContainerGap())
-                    .addComponent(vLabelTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(vLabelTotalPP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(vScrollConjunto)
                         .addGap(12, 12, 12))))
@@ -289,12 +288,13 @@ public class FParalelo extends javax.swing.JFrame
                 .addGap(0, 0, 0)
                 .addComponent(vLabelNumConjunto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vLabelTotal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(vLabelTotalPP)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4))
+                .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(vLabelTiempoEjecPP)
                     .addComponent(vBotonDetener))
@@ -326,7 +326,9 @@ public class FParalelo extends javax.swing.JFrame
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
 
         pack();
@@ -351,7 +353,7 @@ public class FParalelo extends javax.swing.JFrame
                     vTextFileNumMax.setText("3");
                 }
             }
-            vNumMax = Long.valueOf(vTextFileNumMax.getText().trim());
+            vNumMaxPP = Long.valueOf(vTextFileNumMax.getText().trim());
         } else
         {
             if (vTextFileNumExacto.getText().length() == 0)
@@ -364,18 +366,18 @@ public class FParalelo extends javax.swing.JFrame
                     vTextFileNumExacto.setText("3");
                 }
             }
-            vNumMax = Long.valueOf(vTextFileNumExacto.getText().trim());
+            vNumMaxPP = Long.valueOf(vTextFileNumExacto.getText().trim());
         }
         vTextAreaConjunto.setText("================================Creando Conjunto================================");
-        vTextAreaSubconjuntos0.setText("");
-        vTextAreaTodoSubconjunto.setText("");
+        vTextAreaSubconjuntos0PP.setText("");
+        vTextAreaTodoSubconjuntoPP.setText("");
 
         //////////
-        vLabelTotal.setText("Total de subconjuntos: | Subconjuntos que suman 0: ");
+        vLabelTotalPP.setText("Total de subconjuntos: | Subconjuntos que suman 0: ");
         vLabelTiempoEjecPP.setText("Tiempo de ejecución: ");
         //////////
-        mComenzar(new CGenerar().mGenerarNoRepe(vNumMax));
-        
+        vConjuntoPP = new CGenerar().mGenerarNoRepe(vNumMaxPP);
+        mComenzarPP();
 
         setCursor(DEFAULT_CURSOR);
     }//GEN-LAST:event_vBotonGeneradorActionPerformed
@@ -405,12 +407,6 @@ public class FParalelo extends javax.swing.JFrame
         }
     }//GEN-LAST:event_vTextFileNumExactoKeyTyped
 
-    private void vTextFileNumMaxFocusGained(java.awt.event.FocusEvent evt)//GEN-FIRST:event_vTextFileNumMaxFocusGained
-    {//GEN-HEADEREND:event_vTextFileNumMaxFocusGained
-        vTextFileNumExacto.setText(null);
-        vNumRandomP = true;
-    }//GEN-LAST:event_vTextFileNumMaxFocusGained
-
     private void vTextFileNumExactoFocusGained(java.awt.event.FocusEvent evt)//GEN-FIRST:event_vTextFileNumExactoFocusGained
     {//GEN-HEADEREND:event_vTextFileNumExactoFocusGained
         vTextFileNumMax.setText(null);
@@ -436,14 +432,17 @@ public class FParalelo extends javax.swing.JFrame
         new FSeleccion().setVisible(true);
     }//GEN-LAST:event_vBotonRegresarActionPerformed
 
-    public static long vInicioTiempo;
-    public static long vFinTiempo;
+    private void vTextFileNumMaxFocusGained(java.awt.event.FocusEvent evt)//GEN-FIRST:event_vTextFileNumMaxFocusGained
+    {//GEN-HEADEREND:event_vTextFileNumMaxFocusGained
+        vTextFileNumExacto.setText(null);
+        vNumRandomP = true;
+    }//GEN-LAST:event_vTextFileNumMaxFocusGained
+
     public static String vNumCombinaciones = "";
 
     public static int vConteoSubConjTotal = 0;
     public static int vConteoSubconjSuma0 = 0;
-    
-    
+    public static long[] vConjuntoPP = null;
 
     /**
      * Metodo para poder iniciar con la divición del conjunto, tambien escribe
@@ -451,42 +450,50 @@ public class FParalelo extends javax.swing.JFrame
      *
      * @param vConjunto Conjunto generado automaticamente.
      */
-    protected void mComenzar(long vConjunto[])//Hilo
+    protected void mComenzarPP()
     {
-        vConteoSubConjTotal=0;
-        vConteoSubconjSuma0=0;
-        vInicioTiempo = System.nanoTime();
+        vConteoSubConjTotal = 0;
+        vConteoSubconjSuma0 = 0;
 
-        vLabelNumConjunto.setText("Longitud del conjunto: " + vConjunto.length);
-        System.out.println("LONGITUS: "+vConjunto.length);
+        vLabelNumConjunto.setText("Longitud del conjunto: " + vConjuntoPP.length);
+        System.out.println("LONGITUS: " + vConjuntoPP.length);
 
         String vTexto = "{";
-        for (int i = 0; i < vConjunto.length; i++)
+        for (int i = 0; i < vConjuntoPP.length; i++)
         {
-            if (i == vConjunto.length - 1)
+            if (i == vConjuntoPP.length - 1)
             {
-                vTexto += " " + vConjunto[i];
+                vTexto += " " + vConjuntoPP[i];
             } else
             {
-                vTexto += vConjunto[i] + ", ";
+                vTexto += vConjuntoPP[i] + ", ";
             }
             mTiempoFinalPP();
         }
         vTexto += "}";
         vTextAreaConjunto.setText(vTexto);
-        BigInteger vNumSubconjuto=mCalcularSubconjuntos(vConjunto.length);
-        vLabelNumConjuntoInfo.setText("Longitud del conjunto: " + vConjunto.length
+        BigInteger vNumSubconjuto = mCalcularSubconjuntos(vConjuntoPP.length);
+        vLabelNumConjuntoInfo.setText("Longitud del conjunto: " + vConjuntoPP.length
                 + ", Número de combinaciones por hacer: ");
 
-        vLabelNumConjunto.setText(vNumSubconjuto+"");
-        vNumCombinaciones=vLabelNumConjunto.getText();
-        
-        for (int i = vConjunto.length-1; i >= 1; i--)
+        vLabelNumConjunto.setText(vNumSubconjuto + "");
+        vNumCombinaciones = vLabelNumConjunto.getText();
+
+        vInicioTiempo = System.nanoTime();
+
+        Thread vHiloSubconjuntos = new SCSubconjuntosTotal();
+        vHiloSubconjuntos.start();
+        Thread vHiloSum0 = new SCSubconjuntosSum0();
+        vHiloSum0.start();
+
+        /*System.out.println("Paralelo:");
+        for (int i = vConjunto.length; i >= 2; i--)
         {
-            Thread vHilo=new CProcesosParalelo(vConjunto, i);
+            System.err.println("Valor i: " + i);
+            Thread vHilo = new CProcesosParalelo(vConjunto, i);
             vHilo.start();
             vNumLlegarHilo++;
-        }
+        }*/
     }
 
     /**
@@ -549,9 +556,9 @@ public class FParalelo extends javax.swing.JFrame
         });
     }
 
-    public static int vNumLlegarHilo=0;
+    public static int vNumLlegarHilo = 0;
     public static int vNumTerminaHilo = 0;
-    public static long vNumMax = 0;
+    public static long vNumMaxPP = 0;
     public static boolean vNumRandomP = true;
     public static boolean vPausar = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -560,8 +567,8 @@ public class FParalelo extends javax.swing.JFrame
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     public static javax.swing.JButton vBotonDetener;
     public static javax.swing.JButton vBotonGenerador;
@@ -569,12 +576,99 @@ public class FParalelo extends javax.swing.JFrame
     public static javax.swing.JLabel vLabelNumConjunto;
     public static javax.swing.JLabel vLabelNumConjuntoInfo;
     public static javax.swing.JLabel vLabelTiempoEjecPP;
-    public static javax.swing.JLabel vLabelTotal;
+    public static javax.swing.JLabel vLabelTotalPP;
     private javax.swing.JScrollPane vScrollConjunto;
     public static javax.swing.JTextArea vTextAreaConjunto;
-    public static javax.swing.JTextArea vTextAreaSubconjuntos0;
-    public static javax.swing.JTextArea vTextAreaTodoSubconjunto;
+    public static javax.swing.JTextArea vTextAreaSubconjuntos0PP;
+    public static javax.swing.JTextArea vTextAreaTodoSubconjuntoPP;
     private javax.swing.JTextField vTextFileNumExacto;
     private javax.swing.JTextField vTextFileNumMax;
     // End of variables declaration//GEN-END:variables
+}
+
+class SCSubconjuntosSum0 extends Thread
+{
+
+    String vTextSubconjunto0 = "";
+
+    public SCSubconjuntosSum0()
+    {
+    }
+
+    protected void mProcesarInforSubconjuntoSum0PP(long[] vConjunto, long[] vSubconjunto, int vLongitud, int vPosInicial)
+    {
+        if (vLongitud == 0)
+        {
+            int vSumar = 0;
+
+            for (int i = 0; i < vSubconjunto.length; i++)
+            {
+                vSumar += vSubconjunto[i];
+                mTiempoFinalPP();
+            }
+
+            if (vSumar == 0)
+            {
+                vConteoSubconjSuma0++;
+                vTextSubconjunto0 = ": {";
+                for (int i = 0; i < vSubconjunto.length; i++)
+                {
+                    if (i == vSubconjunto.length - 1)
+                    {
+                        vTextSubconjunto0 += " " + vSubconjunto[i];
+                    } else
+                    {
+                        vTextSubconjunto0 += vSubconjunto[i] + ", ";
+                    }
+                    mTiempoFinalPP();
+                }
+                vTextSubconjunto0 += "}\n";
+                vTextAreaSubconjuntos0PP.append(vConteoSubconjSuma0 + vTextSubconjunto0);
+            }
+            return;
+        }
+        for (int i = vPosInicial; i <= vConjunto.length - vLongitud; i++)
+        {
+            mTiempoFinalPP();
+            if (vPausar)
+            {
+                break;
+            }
+            vSubconjunto[vSubconjunto.length - vLongitud] = vConjunto[i];
+            mProcesarInforSubconjuntoSum0PP(vConjunto, vSubconjunto, vLongitud - 1, i + 1);
+        }
+    }
+
+    @Override
+    public void run()
+    {
+        for (int i = vConjuntoPP.length; i >= 2; i--)
+        {
+            mProcesarInforSubconjuntoSum0PP(vConjuntoPP, new long[i], i, i);
+        }
+        System.out.println("<<Termine el conteo>>");
+    }
+}
+
+class SCSubconjuntosTotal extends Thread
+{
+
+    public SCSubconjuntosTotal()
+    {
+    }
+
+    @Override
+    public void run()
+    {
+        vNumLlegarHilo=0;
+        vNumTerminaHilo=0;
+        System.out.println("<<Longitud delconjunto: "+vConjuntoPP.length+">>");
+        for (int i = vConjuntoPP.length; i >= 2; i--)
+        {
+            Thread vHilo = new CProcesosParalelo(i);
+            vHilo.start();
+            vNumLlegarHilo++;
+        }
+        System.out.println("<<Total de hilos: "+vNumLlegarHilo+">>");
+    }
 }

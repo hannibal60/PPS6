@@ -40,7 +40,6 @@ public final class CProcesosEstructurado implements Runnable
     protected void mComenzar(long vConjunto[])//Hilo
     {
 
-        System.out.println("Longitud del conjunto: " + vConjunto.length);
         vLabelNumConjunto.setText("Longitud del conjunto: " + vConjunto.length);
         this.vConjunto = vConjunto;
 
@@ -54,28 +53,29 @@ public final class CProcesosEstructurado implements Runnable
             {
                 vTexto += vConjunto[i] + ", ";
             }
-            mTiempoFinal();
+            mTiempoFinalE();
         }
         vTexto += "}";
         vTextAreaConjunto.setText(vTexto);
         BigInteger vNumSubconjuntos=mCalcularSubconjuntos(vConjunto.length);
         vLabelNumConjuntoInfo.setText("Longitud del conjunto: " + vConjunto.length
-                + ", Número de combinaciones por hacer: " + vNumSubconjuntos);
+                + ", Número de combinaciones por hacer: ");
 
         vLabelNumConjunto.setText(""+vNumSubconjuntos);
         vTextoTamañoConuuntoNumeroCombinaciones = vLabelNumConjunto.getText();
 
+        vInicioTiempo = System.nanoTime();
         for (int i = vConjunto.length; i >= 2; i--)
         {
-            mProcesarInfor(vConjunto, new long[i], i, 0);
+            mProcesarInfoE(vConjunto, new long[i], i, 0);
         }
+        vLabelTotal.setText("Total de subconjuntos: "+vConteoSubConjTotal+" | Subconjuntos que suman 0: "+vConteoSubconjSuma0);
     }
 
-    protected void mProcesarInfor(long[] vConjunto, long[] vSubconjunto, int vLongitud, int vPosInicial)
+    protected void mProcesarInfoE(long[] vConjunto, long[] vSubconjunto, int vLongitud, int vPosInicial)
     {
         if (vLongitud == 0)
         {
-            //mMuestraProceso(vSubconjunto);
             vConteoSubConjTotal++;
             vLabelNumConjunto.setText(vTextoTamañoConuuntoNumeroCombinaciones + " - " + vConteoSubConjTotal);
 
@@ -89,18 +89,18 @@ public final class CProcesosEstructurado implements Runnable
                 {
                     vTextSubconjuntoTotal += vSubconjunto[i] + ", ";
                 }
-                mTiempoFinal();
+                mTiempoFinalE();
             }
             vTextSubconjuntoTotal += "}\n";
 
-            vTextAreaTodoSubconjunto.append(vConteoSubConjTotal + vTextSubconjuntoTotal);
+            vTextAreaTodoSubconjuntoL.append(vConteoSubConjTotal + vTextSubconjuntoTotal);
 
             int vSumar = 0;
 
             for (int i = 0; i < vSubconjunto.length; i++)
             {
                 vSumar += vSubconjunto[i];
-                mTiempoFinal();
+                mTiempoFinalE();
             }
 
             if (vSumar == 0)
@@ -116,22 +116,22 @@ public final class CProcesosEstructurado implements Runnable
                     {
                         vTextSubconjunto0 += vSubconjunto[i] + ", ";
                     }
-                    mTiempoFinal();
+                    mTiempoFinalE();
                 }
                 vTextSubconjunto0 += "}\n";
-                vTextAreaSubconjuntos0.append(vConteoSubconjSuma0 + vTextSubconjunto0);
+                vTextAreaSubconjuntos0L.append(vConteoSubconjSuma0 + vTextSubconjunto0);
             }
             return;
         }
         for (int i = vPosInicial; i <= vConjunto.length - vLongitud; i++)
         {
-            mTiempoFinal();
+            mTiempoFinalE();
             if (vPausar)
             {
                 break;
             }
             vSubconjunto[vSubconjunto.length - vLongitud] = vConjunto[i];
-            mProcesarInfor(vConjunto, vSubconjunto, vLongitud - 1, i + 1);
+            mProcesarInfoE(vConjunto, vSubconjunto, vLongitud - 1, i + 1);
         }
     }
 
@@ -142,9 +142,9 @@ public final class CProcesosEstructurado implements Runnable
     @Override
     public void run()
     {
-        vInicioTiempo = System.nanoTime();
+        
         mComenzar(new CGenerar().mGenerarNoRepe(vNumMax));
-        mTiempoFinal();
+        mTiempoFinalE();
         vBotonDetener.setEnabled(false);
         vBotonGenerador.setEnabled(true);
 

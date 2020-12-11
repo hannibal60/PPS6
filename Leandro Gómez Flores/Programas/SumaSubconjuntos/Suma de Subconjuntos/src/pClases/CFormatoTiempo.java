@@ -19,7 +19,7 @@ public class CFormatoTiempo
     public static long vInicioTiempo;
     public static long vFinTiempo;
 
-    public static void mTiempoFinal()
+    public static void mTiempoFinalE()
     {
         mCalcularTiempo(vLabelTiempoEjec);
     }
@@ -33,10 +33,11 @@ public class CFormatoTiempo
     {
         vFinTiempo = System.nanoTime();
         double vResultado = (double) ((((double) vFinTiempo) - ((double) vInicioTiempo)) / 1000000000);
-        vLabel.setText("Tiempo de ejecución: " + vResultado + " Segundos");
+        vLabel.setText("Tiempo de ejecución: " + formatTime(vFinTiempo-vInicioTiempo));
+//        vLabel.setText("Tiempo de ejecución: " + vResultado + " Segundos");
     }
 
-    /* private static String formatTime(long nanoSeconds)
+    private static String formatTime(long nanoSeconds)
     {
         int vHora, vMinutos, vTmp, vTotalSegNoFrac;
         double vSegunTot, vSegundos;
@@ -90,5 +91,5 @@ public class CFormatoTiempo
             }
         }
         return vResultado.toString();
-    }*/
+    }
 }
