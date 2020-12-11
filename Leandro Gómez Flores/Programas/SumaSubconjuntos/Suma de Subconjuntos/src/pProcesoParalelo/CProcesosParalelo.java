@@ -45,8 +45,8 @@ public final class CProcesosParalelo extends Thread
                 {
                     vTextSubconjuntoTotal += vSubconjunto[i] + ", ";
                 }
-                mTiempoFinalPP();
             }
+            mTiempoFinalPP();
             vTextSubconjuntoTotal += "}\n";
 
             vTextAreaTodoSubconjuntoPP.append(vConteoSubConjTotal + vTextSubconjuntoTotal);
@@ -54,7 +54,7 @@ public final class CProcesosParalelo extends Thread
         }
         for (int i = vPosInicial; i <= vConjuntoPP.length - vLongitud; i++)
         {
-            mTiempoFinalPP();
+            //mTiempoFinalPP();
             if (vPausar)
             {
                 break;
@@ -89,7 +89,7 @@ public final class CProcesosParalelo extends Thread
         if (vNumTerminaHilo == vNumLlegarHilo)
         {
             System.out.println("<<Termine todos los subconjutnos>>");
-            System.out.println("<<Total de hilos terminados: "+vNumTerminaHilo+">>");
+            System.out.println("<<Total de hilos terminados: " + vNumTerminaHilo + ">>");
             vLabelTotalPP.setText("Total de subconjuntos: " + vConteoSubConjTotal + " | Subconjuntos que suman 0: " + vConteoSubconjSuma0);
             vBotonDetener.setEnabled(false);
             vBotonGenerador.setEnabled(true);

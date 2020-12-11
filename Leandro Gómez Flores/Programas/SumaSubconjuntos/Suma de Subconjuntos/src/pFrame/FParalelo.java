@@ -93,7 +93,7 @@ public class FParalelo extends javax.swing.JFrame
         vLabelTiempoEjecPP.setText("Tiempo de ejecución:");
 
         jLabel1.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
-        jLabel1.setText("Longitud de forma random para general: 3 al");
+        jLabel1.setText("Longitud de forma random para generar: 3 al");
 
         vTextFileNumMax.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
         vTextFileNumMax.setHorizontalAlignment(javax.swing.JTextField.LEFT);
@@ -221,7 +221,7 @@ public class FParalelo extends javax.swing.JFrame
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(vTextFileNumMax, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                        .addComponent(vTextFileNumMax, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                         .addGap(36, 36, 36)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -604,7 +604,7 @@ class SCSubconjuntosSum0 extends Thread
             for (int i = 0; i < vSubconjunto.length; i++)
             {
                 vSumar += vSubconjunto[i];
-                mTiempoFinalPP();
+               // mTiempoFinalPP();
             }
 
             if (vSumar == 0)
@@ -620,7 +620,7 @@ class SCSubconjuntosSum0 extends Thread
                     {
                         vTextSubconjunto0 += vSubconjunto[i] + ", ";
                     }
-                    mTiempoFinalPP();
+                    //mTiempoFinalPP();
                 }
                 vTextSubconjunto0 += "}\n";
                 vTextAreaSubconjuntos0PP.append(vConteoSubconjSuma0 + vTextSubconjunto0);
@@ -629,7 +629,7 @@ class SCSubconjuntosSum0 extends Thread
         }
         for (int i = vPosInicial; i <= vConjunto.length - vLongitud; i++)
         {
-            mTiempoFinalPP();
+            //mTiempoFinalPP();
             if (vPausar)
             {
                 break;

@@ -85,7 +85,7 @@ public class FEstructurado extends javax.swing.JFrame
         vLabelTiempoEjec.setText("Tiempo de ejecución:");
 
         jLabel1.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
-        jLabel1.setText("Longitud de forma random para general: 3 al");
+        jLabel1.setText("Longitud de forma random para generar: 3 al");
 
         vTextFileNumMax.setFont(new java.awt.Font("Javanese Text", 0, 14)); // NOI18N
         vTextFileNumMax.setHorizontalAlignment(javax.swing.JTextField.LEFT);
