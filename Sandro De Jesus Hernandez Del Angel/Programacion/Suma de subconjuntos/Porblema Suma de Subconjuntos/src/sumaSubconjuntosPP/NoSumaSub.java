@@ -69,7 +69,6 @@ public class NoSumaSub implements Runnable
             }
         }
         Interfaz.lblTmpNoSuman.setText("Tiempo: " + PPSubconjuntos.timeNanoToSeconds(tIni, System.nanoTime()) + "'s Terminado");
-        Interfaz.btnIniciar.setEnabled(true);
         System.out.println(">>Termine No Suman Subconjuntos");
     }
 

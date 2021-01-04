@@ -207,10 +207,10 @@ public class Interfaz extends javax.swing.JFrame
         jpnlSubSuman.add(lblResultSuman, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 219, 309, -1));
 
         jtaSuman.setEditable(false);
-        jtaSuman.setBackground(new java.awt.Color(24, 23, 28));
+        jtaSuman.setBackground(new java.awt.Color(214, 214, 214));
         jtaSuman.setColumns(20);
         jtaSuman.setFont(new java.awt.Font("TI Uni", 1, 18)); // NOI18N
-        jtaSuman.setForeground(new java.awt.Color(204, 204, 204));
+        jtaSuman.setForeground(new java.awt.Color(102, 102, 102));
         jtaSuman.setRows(5);
         jtaSuman.setAutoscrolls(false);
         jScrollPane4.setViewportView(jtaSuman);
@@ -226,10 +226,10 @@ public class Interfaz extends javax.swing.JFrame
         jpnlSubNoSuman.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jtaNoSuman.setEditable(false);
-        jtaNoSuman.setBackground(new java.awt.Color(24, 23, 28));
+        jtaNoSuman.setBackground(new java.awt.Color(214, 214, 214));
         jtaNoSuman.setColumns(20);
         jtaNoSuman.setFont(new java.awt.Font("TI Uni", 1, 18)); // NOI18N
-        jtaNoSuman.setForeground(new java.awt.Color(204, 204, 204));
+        jtaNoSuman.setForeground(new java.awt.Color(102, 102, 102));
         jtaNoSuman.setRows(5);
         jtaNoSuman.setAutoscrolls(false);
         jScrollPane5.setViewportView(jtaNoSuman);
@@ -255,10 +255,10 @@ public class Interfaz extends javax.swing.JFrame
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jtaTodos.setEditable(false);
-        jtaTodos.setBackground(new java.awt.Color(24, 23, 28));
+        jtaTodos.setBackground(new java.awt.Color(214, 214, 214));
         jtaTodos.setColumns(20);
         jtaTodos.setFont(new java.awt.Font("TI Uni", 1, 18)); // NOI18N
-        jtaTodos.setForeground(new java.awt.Color(204, 204, 204));
+        jtaTodos.setForeground(new java.awt.Color(102, 102, 102));
         jtaTodos.setRows(5);
         jtaTodos.setAutoscrolls(false);
         jScrollPane3.setViewportView(jtaTodos);
@@ -363,7 +363,6 @@ public class Interfaz extends javax.swing.JFrame
         {
             lblError(3);
         }
-
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void jtfConjuntoKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jtfConjuntoKeyTyped
@@ -460,7 +459,6 @@ public class Interfaz extends javax.swing.JFrame
                 lblError.setText("Tamaño de ser mayor a 2");
                 break;
         }
-
     }
 
     /**

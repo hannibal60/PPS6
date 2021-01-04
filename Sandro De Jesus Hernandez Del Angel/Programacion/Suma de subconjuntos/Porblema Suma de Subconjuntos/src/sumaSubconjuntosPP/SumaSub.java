@@ -73,6 +73,7 @@ public class SumaSub implements Runnable
         }
         Interfaz.lblTmpSuman.setText("Tiempo: " + PPSubconjuntos.timeNanoToSeconds(tIni, System.nanoTime()) + "'s Terminado");
         System.out.println(">Termine Suma Subconjuntos");
+        Interfaz.btnIniciar.setEnabled(true);
     }
 
     public SumaSub(int[] arr, int sum)
